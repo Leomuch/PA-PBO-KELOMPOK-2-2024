@@ -240,18 +240,18 @@ public class App extends menu {
             System.out.println("Belum Ada Data Pemain");
             pause();
         } else {
-            System.out.println("===========================================================================");
-            System.out.printf("|%-4s| %-25s| %-15s| %-15s| %-6s| %n", "No", "Nama Pemain", "Asal Klub", "Tanggal Lahir", "Umur" );
-            System.out.println("===========================================================================");
+            System.out.println("=====================================================================================");
+            System.out.printf("|%-4s| %-25s| %-25s| %-15s| %-6s| %n", "No", "Nama Pemain", "Asal Klub", "Tanggal Lahir", "Umur" );
+            System.out.println("=====================================================================================");
             for (int i = 0; i < player.size(); i++) {
                 pemain plyr = player.get(i);
                 String namaPemain = plyr.getNamaPemain();
                 int umur = plyr.getUmur();
                 String asalKlub = plyr.getAsalKlub();
                 LocalDate tanggalLahir = plyr.getTanggalLahir();
-                System.out.printf("|%-4d| %-25s| %-15s| %-15s| %-6d| %n", i + 1, namaPemain, asalKlub, tanggalLahir, umur);
+                System.out.printf("|%-4d| %-25s| %-25s| %-15s| %-6d| %n", i + 1, namaPemain, asalKlub, tanggalLahir, umur);
             }
-            System.out.println("===========================================================================");
+            System.out.println("=====================================================================================");
         }
     }
     
