@@ -23,14 +23,11 @@ public class menu {
     protected void tambahDetail() {
         System.out.println("==============================");
         System.out.println("||  1. Tambah Pemain        ||");
-        System.out.println("||  2. Tampil Pemain        ||");
-        System.out.println("||  3. Update Pemain        ||");
-        System.out.println("||  4. Hapus Pemain         ||");
-        System.out.println("||  5. Lihat Statistik      ||");
-        System.out.println("||  6. Tambah Statistik     ||");
-        System.out.println("||  7. Lihat Kontrak        ||");
-        System.out.println("||  8. Tambah Kontrak       ||");
-        System.out.println("||  9. Kembali              ||");
+        System.out.println("||  2. Update Pemain        ||");
+        System.out.println("||  3. Hapus Pemain         ||");
+        System.out.println("||  4. Tambah Statistik     ||");
+        System.out.println("||  5. Tambah Kontrak       ||");
+        System.out.println("||  6. Kembali              ||");
         System.out.println("==============================");
         System.out.print("Pilihan : ");
     }
