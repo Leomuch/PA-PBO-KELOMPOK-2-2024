@@ -483,20 +483,66 @@ public class App extends menu {
         }
         String namaPemain = cekPemain.getNamaPemain();
         int idPemainBaru = cekPemain.getIdPemain();
-        System.out.print("Masukkan Tanggal Awal Kontrak (YYYY-MM-DD) : ");
-        String tanggalInputAwal = br.readLine();
-        LocalDate kontrakAwal = LocalDate.parse(tanggalInputAwal, DateTimeFormatter.ISO_LOCAL_DATE);
-        System.out.print("Masukkan Tanggal Akhir Kontrak (YYYY-MM-DD) : ");
-        String tanggalInputAkhir = br.readLine();
-        LocalDate kontrakAkhir = LocalDate.parse(tanggalInputAkhir, DateTimeFormatter.ISO_LOCAL_DATE);
-        System.out.print("Masukkan Nilai Kontrak     : ");
-        double nilaiKontrak = Double.parseDouble(br.readLine());
-        System.out.print("Masukkan Klausul Pelepasan : ");
-        double klausulPelepasan = Double.parseDouble(br.readLine());
+    
+        LocalDate kontrakAwal = null;
+        while (true) {
+            try {
+                System.out.print("Masukkan Tanggal Awal Kontrak (YYYY-MM-DD) : ");
+                String tanggalInputAwal = br.readLine();
+                kontrakAwal = LocalDate.parse(tanggalInputAwal, DateTimeFormatter.ISO_LOCAL_DATE);
+                break;
+            } catch (DateTimeParseException e) {
+                System.out.println("Format tanggal yang dimasukkan salah. Silakan coba lagi.");
+            }
+        }
+    
+        LocalDate kontrakAkhir = null;
+        while (true) {
+            try {
+                System.out.print("Masukkan Tanggal Akhir Kontrak (YYYY-MM-DD) : ");
+                String tanggalInputAkhir = br.readLine();
+                kontrakAkhir = LocalDate.parse(tanggalInputAkhir, DateTimeFormatter.ISO_LOCAL_DATE);
+                break;
+            } catch (DateTimeParseException e) {
+                System.out.println("Format tanggal yang dimasukkan salah. Silakan coba lagi.");
+            }
+        }
+    
+        double nilaiKontrak = -1;
+        while (true) {
+            try {
+                System.out.print("Masukkan Nilai Kontrak     : ");
+                nilaiKontrak = Double.parseDouble(br.readLine());
+                if (nilaiKontrak < 0) {
+                    System.out.println("Nilai kontrak tidak boleh kurang dari 0. Silakan coba lagi.");
+                    continue;
+                }
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Input tidak valid. Masukkan nilai numerik untuk nilai kontrak.");
+            }
+        }
+    
+        double klausulPelepasan = -1;
+        while (true) {
+            try {
+                System.out.print("Masukkan Klausul Pelepasan : ");
+                klausulPelepasan = Double.parseDouble(br.readLine());
+                if (klausulPelepasan < 0) {
+                    System.out.println("Klausul pelepasan tidak boleh kurang dari 0. Silakan coba lagi.");
+                    continue;
+                }
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Input tidak valid. Masukkan nilai numerik untuk klausul pelepasan.");
+            }
+        }
+    
         kontrakController.addContract(kontrakAwal, kontrakAkhir, nilaiKontrak, klausulPelepasan, idPemainBaru, namaPemain);
         System.out.println("Kontrak Pemain Berhasil Ditambahkan");
         pause();
     }
+    
 
     private static void updatePemain(ArrayList<pemain> player) throws IOException, SQLException {
         clearScreen();
