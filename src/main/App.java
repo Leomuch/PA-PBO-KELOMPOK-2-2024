@@ -299,8 +299,7 @@ public class App extends menu {
         int gol = state.getGol();
         int assist = state.getAssist();
         int match = state.getMatch();
-        clearScreen();
-        System.out.println("Pemain dengan ID " + idPemain + " ditemukan!!!");
+
         System.out.println("==========================================================================");
         System.out.printf("|%-25s| %-15s| %-8s| %-8s| %-8s| %n", "Nama Pemain", "Posisi", "Match", "Gol", "Assist" );
         System.out.println("==========================================================================");
@@ -349,8 +348,6 @@ public class App extends menu {
         LocalDate tanggalAkhirKontrak = kontrak.getTanggalAkhirKontrak();
         double nilaiKontrak = kontrak.getNilaiKontrak();
         double klausulPelepasan = kontrak.getKlausulPelepasan();
-        clearScreen();
-        System.out.println("Pemain dengan ID " + idPemain + " ditemukan!!!");
         System.out.println("=============================================================================================================");
         System.out.printf("|%-23s| %-21s| %-22s| %-15s| %-18s| %n", "Nama Pemain", "Tanggal Awal Kontrak", "Tanggal Akhir Kontrak", "Nilai Kontrak", "Klausul Pelepasan" );
         System.out.println("=============================================================================================================");
@@ -428,11 +425,12 @@ public class App extends menu {
     
     private static void tambahStatistik(ArrayList<pemain> player) throws IOException, SQLException {
         clearScreen();
+        tampilkanPemain(player);
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
-        tampilkanPemain(player);
         System.out.print("Masukkan ID Pemain     : ");
         int idPemain = Integer.parseInt(br.readLine());
+
         pemain cekPemain = null;
         for (pemain cek : player) {
             if (cek.getIdPemain() == idPemain) {
@@ -447,57 +445,57 @@ public class App extends menu {
         }
         String namaPemain = cekPemain.getNamaPemain();
         System.out.println(namaPemain);
-        System.out.print("Masukkan Posisi Pemain : ");
-        String posisi = br.readLine();
+
     
-        int gol = -1;
-        while (gol < 0) {
-            System.out.print("Masukkan Jumlah Gol    : ");
-            gol = Integer.parseInt(br.readLine());
-            if (gol < 0) {
-                System.out.println("Jumlah gol tidak boleh negatif. Silakan masukkan ulang.");
-            }
-        }
-    
-        int assist = -1;
-        while (assist < 0) {
-            System.out.print("Masukkan Jumlah Assist : ");
-            assist = Integer.parseInt(br.readLine());
-            if (assist < 0) {
-                System.out.println("Jumlah assist tidak boleh negatif. Silakan masukkan ulang.");
-            }
-        }
-    
-        int match = -1;
-        while (match < 0) {
-            System.out.print("Masukkan Jumlah Match  : ");
-            match = Integer.parseInt(br.readLine());
-            if (match < 0) {
-                System.out.println("Jumlah match tidak boleh negatif. Silakan masukkan ulang.");
-            }
-        }
-    
+        // Cek apakah ID pemain sudah ada
         boolean idPlayerExists = statistikController.checkStatistikExist(idPemain);
         if (idPlayerExists) {
+            // Jika ID pemain sudah ada, tanyakan apakah ingin update atau tambah data baru
             System.out.println("Data Statistik Pemain Tersebut Sudah Ada");
-            System.out.print("Data sudah ada. Ingin menambah data baru (1) atau mengedit (2)? Masukkan pilihan: ");
+            System.out.print("Ingin mengedit data (1) atau menambah data baru (2)? Masukkan pilihan: ");
             int pilihan = Integer.parseInt(br.readLine());
     
             if (pilihan == 1) {
-                statistikController.addStatistik(posisi, gol, assist, match, idPemain, namaPemain);
-            } else if (pilihan == 2) {
                 // Logika untuk memperbarui data
                 statistikController.updateStatistik(idPemain);
+            } else if (pilihan == 2) {
+                // Logika untuk menambah data baru
+                // Meminta input untuk data baru
+                System.out.print("Masukkan Posisi Pemain : ");
+                String posisi = br.readLine();
+                int gol = getInput("Masukkan Jumlah Gol    : ");
+                int assist = getInput("Masukkan Jumlah Assist : ");
+                int match = getInput("Masukkan Jumlah Match  : ");
+                statistikController.addStatistik(posisi, gol, assist, match, idPemain, namaPemain);
             } else {
                 System.out.println("Pilihan tidak valid.");
             }
         } else {
-            // Logika untuk menambah data baru
+            // Jika ID pemain tidak ada, meminta input untuk menambahkan data baru
+            System.out.print("Masukkan Posisi Pemain : ");
+            String posisi = br.readLine();
+            int gol = getInput("Masukkan Jumlah Gol    : ");
+            int assist = getInput("Masukkan Jumlah Assist : ");
+            int match = getInput("Masukkan Jumlah Match  : ");
             statistikController.addStatistik(posisi, gol, assist, match, idPemain, namaPemain);
         }
     
-        System.out.println("Statistik Pemain Berhasil Ditambahkan");
+        System.out.println("Operasi pada Statistik Pemain Berhasil Dilakukan");
         pause();
+    }
+    
+    // Metode bantuan untuk mendapatkan input yang valid dari pengguna
+    private static int getInput(String message) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int input = -1;
+        while (input < 0) {
+            System.out.print(message);
+            input = Integer.parseInt(br.readLine());
+            if (input < 0) {
+                System.out.println("Input tidak boleh negatif. Silakan masukkan ulang.");
+            }
+        }
+        return input;
     }
     
     
