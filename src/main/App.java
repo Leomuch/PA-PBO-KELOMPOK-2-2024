@@ -84,7 +84,7 @@ public class App extends menu {
                         menuTambahDetail(pemainInterface, player, statistikPlayer, contract);
                         break;
                     case "USER":
-                        // menuUser();
+                        menuUser(pemainInterface, player, statistikPlayer, contract);
                     default:
                     break;
                 }
@@ -115,6 +115,31 @@ public class App extends menu {
         
         akunController.regis(username, hash, role);
         pause();
+    }
+
+    private static void menuUser(ArrayList<interfacePemain> pemainInterface, ArrayList<pemain> player, ArrayList<statistik> stat, ArrayList<kontrakPemain> contract) throws IOException, ParseException, SQLException {
+        playerController.readPlayer();
+        InputStreamReader isr = new InputStreamReader(System.in);
+        BufferedReader br = new BufferedReader(isr);
+        menu obj = new menu();
+        int pilihan;
+
+        do {
+            clearScreen();
+            obj.menuUser();
+            pilihan = Integer.parseInt(br.readLine());
+
+            switch(pilihan) {
+                case 1:
+                    menuLihatDetail(pemainInterface, player, stat, contract);
+                    break;
+                case 2:
+                    pause();
+                    break;
+                default:
+                    break;
+            }
+        } while (pilihan != 2);
     }
 
     private static void menuTambahDetail(ArrayList<interfacePemain> pemainInterface, ArrayList<pemain> player, ArrayList<statistik> stat, ArrayList<kontrakPemain> contract) throws IOException, ParseException, SQLException {
