@@ -166,7 +166,7 @@ public class App extends menu {
                     hapusPemain(player);
                     break;
                 case 5:
-                    lihatStatistik();
+                    lihatStatistik(pemainInterface, player, stat);
                     break;
                 case 6:
                     tambahStatistik(player);
@@ -203,7 +203,7 @@ public class App extends menu {
                     pause();
                     break;
                     case 2:
-                    // lihatStatistik(pemainInterface, player, stat);               
+                    lihatStatistik(pemainInterface, player, stat);               
                     pause();
                     break;
                     case 3:
@@ -220,27 +220,27 @@ public class App extends menu {
     }
     
     private static void tampilkanPemain(ArrayList<pemain> player) throws IOException, SQLException {
+        clearScreen();
         if (player.isEmpty()) {
             System.out.println("Belum Ada Data Pemain");
             pause();
         } else {
-            clearScreen();
             System.out.println("===========================================================================");
             System.out.printf("|%-4s| %-25s| %-15s| %-15s| %-6s| %n", "No", "Nama Pemain", "Asal Klub", "Tanggal Lahir", "Umur" );
+            System.out.println("===========================================================================");
             for (int i = 0; i < player.size(); i++) {
                 pemain plyr = player.get(i);
                 String namaPemain = plyr.getNamaPemain();
                 int umur = plyr.getUmur();
                 String asalKlub = plyr.getAsalKlub();
                 LocalDate tanggalLahir = plyr.getTanggalLahir();
-                System.out.println("===========================================================================");
                 System.out.printf("|%-4d| %-25s| %-15s| %-15s| %-6d| %n", i + 1, namaPemain, asalKlub, tanggalLahir, umur);
             }
             System.out.println("===========================================================================");
         }
     }
     
-    private static void lihatStatistik() throws IOException, SQLException {
+    private static void lihatStatistik(ArrayList<interfacePemain> pemainInterface, ArrayList<pemain> player, ArrayList<statistik> stateList) throws IOException, SQLException {
         statistikController.readStatistics();
         System.out.println("Daftar Pemain saat ini:");
         InputStreamReader isr = new InputStreamReader(System.in);
