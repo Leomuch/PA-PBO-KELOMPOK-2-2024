@@ -55,7 +55,8 @@ public class kontrakController {
             System.out.println("Gagal mengecek.");
             e.printStackTrace();
         }
-            // Logika untuk menambah data baru ke database
+    
+        if (idPlayerExists) {
             String query = "INSERT INTO kontrakPemain (kontrakAwal, kontrakAkhir, nilaiKontrak, klausulPelepasan, idPemain, namaPemain) VALUES (?, ?, ?, ?, ?, ?)";
             try {
                 db.preparedStatement = db.conn.prepareStatement(query);
@@ -78,5 +79,9 @@ public class kontrakController {
                     e.printStackTrace();
                 }
             }
-        }
+        } else {
+            // Logika untuk menambah data baru ke database
+            
     }        
+}
+}
