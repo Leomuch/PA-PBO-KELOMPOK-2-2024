@@ -83,7 +83,7 @@ public class akunController extends akun {
                 }
             }
         }
-    }   
+    }
 
     public static final String predeterminedSalt = "TujuhKeajaibanInformatika";
 
