@@ -14,18 +14,19 @@ public class playerController {
         String namaPemain, asalKlub, negara;
         LocalDate tanggalLahir;
         int umur, idPemain;
+        boolean Exists = false;
         try {
             db.preparedStatement = (PreparedStatement) db.conn.prepareStatement(query);
             db.resultSet = db.preparedStatement.executeQuery();
             while (db.resultSet.next()) {
+                Exists = false;
                 idPemain = db.resultSet.getInt("idPemain");
                 namaPemain = db.resultSet.getString("namaPemain");
                 asalKlub = db.resultSet.getString("asalKlub");
                 tanggalLahir = db.resultSet.getDate("tanggalLahir").toLocalDate();
                 umur = Period.between(tanggalLahir, LocalDate.now()).getYears();
-                umur = db.resultSet.getInt("umur");
+                // umur = db.resultSet.getInt("umur");
                 negara = db.resultSet.getString("negara");
-                boolean Exists = false;
                 for (pemain existingData : App.player) {
                     if (existingData.getIdPemain() == idPemain) {
                         existingData.setNamaPemain(namaPemain);
@@ -33,11 +34,9 @@ public class playerController {
                         existingData.setTanggalLahir(tanggalLahir);
                         existingData.setUmur(umur);
                         existingData.setNegara(negara);
-                        Exists = true;
-                        break;
+                        Exists = true;  
                     }
                 }
-                // App.player.clear();
                 if (!Exists) {
                     pemain newPlayer = new pemain(idPemain, namaPemain, asalKlub, tanggalLahir, umur, negara);
                     App.player.add(newPlayer);
@@ -46,6 +45,10 @@ public class playerController {
         } catch (SQLException e) {
             System.out.println("Gagal Membaca Data Pemain");
             e.printStackTrace();
+        } finally {
+            if (db.resultSet != null) db.resultSet.close();
+            if (db.preparedStatement != null) db.preparedStatement.close();
+            if (db.conn != null) db.conn.close();
         }
     }
 
