@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 01, 2024 at 04:02 PM
+-- Generation Time: Jun 01, 2024 at 04:25 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -76,33 +76,34 @@ CREATE TABLE `pemain` (
   `namaPemain` varchar(255) NOT NULL,
   `asalKlub` varchar(255) NOT NULL,
   `tanggalLahir` date NOT NULL,
-  `umur` int(11) NOT NULL
+  `umur` int(11) NOT NULL,
+  `negara` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `pemain`
 --
 
-INSERT INTO `pemain` (`idPemain`, `namaPemain`, `asalKlub`, `tanggalLahir`, `umur`) VALUES
-(1, 'Kylian Mbappe', 'PSG', '1998-12-20', 25),
-(2, 'Frankie De Jong', 'Barcelona', '1997-05-12', 27),
-(3, 'Lionel Messi', 'Inter Miami', '1987-06-24', 36),
-(4, 'Jude Bellingham', 'Real Madrid', '2003-06-29', 20),
-(6, 'Pablo Gavi', 'Barcelona', '2004-08-05', 19),
-(7, 'Pedri Gonzales', 'Barcelona', '2002-11-25', 21),
-(8, 'Erling Halland', 'Man City', '2000-07-21', 23),
-(9, 'Alejandro Garnacho', 'Man United', '2004-07-01', 19),
-(10, 'Julian Alvarez', 'Man City', '2000-01-31', 24),
-(11, 'Phil Foden', 'Man City', '2000-05-28', 24),
-(12, 'Mohammed Salah', 'Liverpool', '1992-06-15', 31),
-(13, 'Thomas Muller', 'Bayern Munchen', '1989-09-13', 34),
-(14, 'Timo Wurner', 'Tottenham', '1996-03-06', 28),
-(15, 'Robert Sanchez', 'Chelsea', '1997-11-18', 26),
-(16, 'Enzo Fernandez', 'Chelsea', '2001-01-17', 23),
-(17, 'Jamal Musiala', 'Bayern Munchen', '2003-02-26', 21),
-(18, 'Lamine Yamal', 'Barcelona', '2007-07-13', 16),
-(19, 'Florian Wirtz', 'Bayer Leverkusen', '2003-05-03', 21),
-(20, 'Gabriel Jesus', 'Arsenal', '1997-04-03', 27);
+INSERT INTO `pemain` (`idPemain`, `namaPemain`, `asalKlub`, `tanggalLahir`, `umur`, `negara`) VALUES
+(1, 'Kylian Mbappe', 'PSG', '1998-12-20', 25, 'Prancis'),
+(2, 'Frenkie De Jong', 'Barcelona', '1997-05-12', 27, 'Belanda'),
+(3, 'Lionel Messi', 'Inter Miami', '1987-06-24', 36, 'Argentina'),
+(4, 'Jude Bellingham', 'Real Madrid', '2003-06-29', 20, 'Inggris'),
+(5, 'Pablo Gavi', 'Barcelona', '2004-08-05', 19, 'Spanyol'),
+(6, 'Pedri Gonzales', 'Barcelona', '2002-11-25', 21, 'Spanyol'),
+(7, 'Erling Halland', 'Man City', '2000-07-21', 23, 'Norwegia'),
+(8, 'Alejandro Garnacho', 'Man United', '2004-07-01', 19, 'Argentina'),
+(9, 'Julian Alvarez', 'Man City', '2000-01-31', 24, 'Argentina'),
+(10, 'Phil Foden', 'Man City', '2000-05-28', 24, 'Inggris'),
+(11, 'Mohammed Salah', 'Liverpool', '1992-06-15', 31, 'Mesir'),
+(12, 'Thomas Muller', 'Bayern Munchen', '1989-09-13', 34, 'Jerman'),
+(13, 'Gabriel Jesus', 'Arsenal', '1997-04-03', 27, 'Brazil'),
+(14, 'Timo Werner', 'Tottenham', '1996-03-06', 28, 'Jerman'),
+(15, 'Robert Sanchez', 'Chelsea', '1997-11-18', 26, 'Spanyol'),
+(16, 'Enzo Fernandez', 'Chelsea', '2001-01-17', 23, 'Argentina'),
+(17, 'Jamal Musiala', 'Bayern Munchen', '2003-02-26', 21, 'Jerman'),
+(18, 'Lamine Yamal', 'Barcelona', '2007-07-13', 16, 'Spanyol'),
+(19, 'Florian Wirtz', 'Bayer Leverkusen', '2003-05-03', 21, 'Jerman');
 
 -- --------------------------------------------------------
 

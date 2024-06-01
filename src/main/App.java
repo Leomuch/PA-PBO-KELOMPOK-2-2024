@@ -359,7 +359,7 @@ public class App extends menu {
         playerController.readPlayer();
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
-        String namaPemain, asalKlub;
+        String namaPemain, asalKlub, negara;
         LocalDate tanggalLahir;
         int umur;
     
@@ -384,31 +384,43 @@ public class App extends menu {
                 System.out.println("Asal klub hanya boleh mengandung huruf dan spasi. Silakan coba lagi.");
             }
         }
-    
+
+        
         while (true) {
             try {
                 System.out.print("Masukkan Tanggal Lahir Pemain (YYYY-MM-DD) : ");
                 String tanggalInput = br.readLine();
                 tanggalLahir = LocalDate.parse(tanggalInput, DateTimeFormatter.ISO_LOCAL_DATE);
                 umur = Period.between(tanggalLahir, LocalDate.now()).getYears();
-    
+                
                 if (umur < 15) {
                     System.out.println("Umur pemain harus minimal 15 tahun.");
                     continue;
                 }
-    
+                
                 break;
             } catch (DateTimeParseException e) {
                 System.out.println("Format tanggal yang dimasukkan salah. Silakan coba lagi.");
             }
         }
-    
+        
+        // Validasi negara
+        while (true) {
+            System.out.print("Masukkan Asal Negara   : ");
+            negara = br.readLine();
+            if (negara.matches("[a-zA-Z\\s]+")) {
+                break;
+            } else {
+                System.out.println("Asal klub hanya boleh mengandung huruf dan spasi. Silakan coba lagi.");
+            }
+        }
+        
         System.out.println("Pemain Berhasil Ditambahkan");
-        playerController.addPlayer(namaPemain, asalKlub, tanggalLahir, umur);
+        playerController.addPlayer(namaPemain, asalKlub, tanggalLahir, umur, negara);
         pause();
     }
     
-
+    
     private static void tambahStatistik(ArrayList<pemain> player) throws IOException, SQLException {
         clearScreen();
         InputStreamReader isr = new InputStreamReader(System.in);
@@ -552,7 +564,7 @@ public class App extends menu {
         clearScreen();
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
-        String newNamePlayer, newClub;
+        String newNamePlayer, newClub, newCountry;
         LocalDate newBirthDate;
         int newAge;
         System.out.println("Update Data Pemain");
@@ -578,19 +590,21 @@ public class App extends menu {
                             System.out.println("Umur pemain harus minimal 15 tahun.");
                             continue;
                         }
-        
+                        
                         break;
                     } catch (DateTimeParseException e) {
                         System.out.println("Format tanggal yang dimasukkan salah. Silakan coba lagi.");
                     }
                 }
+                System.out.print("Masukkan Asal Negara Baru  : ");
+                newCountry = br.readLine();
                 newPlayer.setNamaPemain(newNamePlayer);
                 newPlayer.setAsalKlub(newClub);
                 newPlayer.setTanggalLahir(newBirthDate);
                 newPlayer.setUmur(newAge);
                 int playerId = selectedPlayer.getIdPemain() + 1;
                 System.out.println(playerId);
-                playerController.updatePlayer(playerId, newNamePlayer, newClub, newBirthDate, newAge);
+                playerController.updatePlayer(playerId, newNamePlayer, newClub, newBirthDate, newAge, newCountry);
                 System.out.println("Data Pemain Berhasil Diupdate");
                 pause();
             }

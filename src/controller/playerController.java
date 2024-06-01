@@ -11,7 +11,7 @@ public class playerController {
     public static void readPlayer() throws SQLException {
         db.connection();
         String query = "SELECT * FROM pemain";
-        String namaPemain, asalKlub;
+        String namaPemain, asalKlub, negara;
         LocalDate tanggalLahir;
         int umur, idPemain;
         try {
@@ -24,6 +24,7 @@ public class playerController {
                 tanggalLahir = db.resultSet.getDate("tanggalLahir").toLocalDate();
                 umur = Period.between(tanggalLahir, LocalDate.now()).getYears();
                 umur = db.resultSet.getInt("umur");
+                negara = db.resultSet.getString("negara");
                 boolean Exists = false;
                 for (pemain existingData : App.player) {
                     if (existingData.getIdPemain() == idPemain) {
@@ -31,13 +32,14 @@ public class playerController {
                         existingData.setAsalKlub(asalKlub);
                         existingData.setTanggalLahir(tanggalLahir);
                         existingData.setUmur(umur);
+                        existingData.setNegara(negara);
                         Exists = true;
                         break;
                     }
                 }
                 // App.player.clear();
                 if (!Exists) {
-                    pemain newPlayer = new pemain(idPemain, namaPemain, asalKlub, tanggalLahir, umur);
+                    pemain newPlayer = new pemain(idPemain, namaPemain, asalKlub, tanggalLahir, umur, negara);
                     App.player.add(newPlayer);
                 }
             }
@@ -47,7 +49,7 @@ public class playerController {
         }
     }
 
-    public static void addPlayer(String namaPemain, String asalKlub, LocalDate tanggalLahir, int umur) throws SQLException {
+    public static void addPlayer(String namaPemain, String asalKlub, LocalDate tanggalLahir, int umur, String negara) throws SQLException {
         db.connection();
         boolean pemainExists = false;
         String readPemain = "SELECT * FROM pemain WHERE namaPemain = ?";
@@ -66,13 +68,14 @@ public class playerController {
             e.printStackTrace();
         }
         if (!pemainExists) {
-            String query = "INSERT INTO pemain (namaPemain, asalKlub, tanggalLahir, umur) VALUES (?,?,?,?)";
+            String query = "INSERT INTO pemain (namaPemain, asalKlub, tanggalLahir, umur, negara) VALUES (?,?,?,?,?)";
             try {
                 db.preparedStatement = (PreparedStatement) db.conn.prepareStatement(query);
                 db.preparedStatement.setString(1, namaPemain);
                 db.preparedStatement.setString(2, asalKlub);
                 db.preparedStatement.setDate(3, Date.valueOf(tanggalLahir));
                 db.preparedStatement.setInt(4, umur);
+                db.preparedStatement.setString(5, negara);
                 db.preparedStatement.executeUpdate();
                 System.out.println("Tambah Data Berhasil.");
             } catch (SQLException e) {
@@ -89,9 +92,9 @@ public class playerController {
         }
     }
 
-    public static void updatePlayer(int idPemain, String namaPemain, String asalKlub, LocalDate tanggalLahir, int umur) throws SQLException {
+    public static void updatePlayer(int idPemain, String namaPemain, String asalKlub, LocalDate tanggalLahir, int umur, String negara) throws SQLException {
         db.connection();
-        String query = "UPDATE pemain SET namaPemain = ?, asalKlub = ?, tanggalLahir = ?, umur = ? WHERE idPemain = ?";
+        String query = "UPDATE pemain SET namaPemain = ?, asalKlub = ?, tanggalLahir = ?, umur = ?, negara ? WHERE idPemain = ?";
     
         try (PreparedStatement preparedStatement = db.conn.prepareStatement(query)) {
             preparedStatement.setString(1, namaPemain);
@@ -99,6 +102,7 @@ public class playerController {
             preparedStatement.setDate(3, Date.valueOf(tanggalLahir));
             preparedStatement.setInt(4, umur);
             preparedStatement.setInt(5, idPemain);
+            preparedStatement.setString(6, negara);
     
             int affectedRows = preparedStatement.executeUpdate();
             if (affectedRows > 0) {

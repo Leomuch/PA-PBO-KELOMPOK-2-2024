@@ -4,17 +4,17 @@ import java.time.LocalDate;
 
 public class pemain {
     private int idPemain;
-    private String namaPemain;
-    private String asalKlub;
+    private String namaPemain, asalKlub, negara;
     private LocalDate tanggalLahir;
     private int umur;
 
-    public pemain(int idPemain, String namaPemain, String asalKlub, LocalDate tanggalLahir, int umur){
+    public pemain(int idPemain, String namaPemain, String asalKlub, LocalDate tanggalLahir, int umur, String negara){
         this.idPemain = idPemain;
         this.namaPemain = namaPemain;
         this.asalKlub = asalKlub;
         this.tanggalLahir = tanggalLahir;
         this.umur = umur;
+        this.negara = negara;
     }
     public int getIdPemain() {
         return idPemain;
@@ -31,6 +31,9 @@ public class pemain {
     public LocalDate getTanggalLahir() {
         return tanggalLahir;
     }
+    public String getNegara() {
+        return negara;
+    }
     public void setIdPemain(int idPemain) {
         this.idPemain = idPemain;
     }
@@ -45,5 +48,8 @@ public class pemain {
     }
     public void setTanggalLahir(LocalDate tanggalLahir) {
         this.tanggalLahir = tanggalLahir;
+    }
+    public void setNegara(String negara) {
+        this.negara = negara;
     }
 }
