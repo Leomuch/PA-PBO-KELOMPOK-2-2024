@@ -5,4 +5,4 @@
 1. Najwa Felira Zetti (2209106052)
 2. Arindra Nurshadrina Ramadini (2209106070)
 3. Sophy Awaliah (2209106072)
-4. Muchlas Andrey Pahlevi (2209106082)
+4. Muchlas Andrey Pahlevi (2209106082) (KETUA)
