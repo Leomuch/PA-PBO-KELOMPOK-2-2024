@@ -186,7 +186,6 @@ public class App extends menu {
         } while (pilihan != 9);
     }
 
-    @SuppressWarnings("unused")
     private static void menuLihatDetail(ArrayList<interfacePemain> pemainInterface, ArrayList<pemain> player, ArrayList<statistik> stat, ArrayList<kontrakPemain> contract) throws IOException, ParseException, SQLException {
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
