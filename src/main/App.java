@@ -203,7 +203,6 @@ public class App extends menu {
         } while (pilihan != 6);
     }
 
-    @SuppressWarnings("unused")
     private static void menuLihatDetail(ArrayList<interfacePemain> pemainInterface, ArrayList<pemain> player, ArrayList<statistik> stat, ArrayList<kontrakPemain> contract) throws IOException, ParseException, SQLException {
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
@@ -236,20 +235,20 @@ public class App extends menu {
     }
     
     private static void tampilkanPemain(ArrayList<pemain> player) throws IOException, SQLException {
+        clearScreen();
         if (player.isEmpty()) {
             System.out.println("Belum Ada Data Pemain");
             pause();
         } else {
-            clearScreen();
             System.out.println("===========================================================================");
             System.out.printf("|%-4s| %-25s| %-15s| %-15s| %-6s| %n", "No", "Nama Pemain", "Asal Klub", "Tanggal Lahir", "Umur" );
+            System.out.println("===========================================================================");
             for (int i = 0; i < player.size(); i++) {
                 pemain plyr = player.get(i);
                 String namaPemain = plyr.getNamaPemain();
                 int umur = plyr.getUmur();
                 String asalKlub = plyr.getAsalKlub();
                 LocalDate tanggalLahir = plyr.getTanggalLahir();
-                System.out.println("===========================================================================");
                 System.out.printf("|%-4d| %-25s| %-15s| %-15s| %-6d| %n", i + 1, namaPemain, asalKlub, tanggalLahir, umur);
             }
             System.out.println("===========================================================================");
