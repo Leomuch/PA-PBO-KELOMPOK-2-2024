@@ -485,7 +485,7 @@ public class App extends menu {
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
         tampilkanPemain(player);
-        System.out.print("Masukkan ID Pemain     : ");
+        System.out.print("Masukkan ID Pemain          : ");
         int idPemain = Integer.parseInt(br.readLine());
         pemain cekPemain = null;
         for (pemain cek : player) {
@@ -504,7 +504,7 @@ public class App extends menu {
         LocalDate kontrakAwal = null;
         while (true) {
             try {
-                System.out.print("Masukkan Tanggal Awal Kontrak (YYYY-MM-DD) : ");
+                System.out.print("Masukkan Tanggal Awal Kontrak (YYYY-MM-DD)  : ");
                 String tanggalInputAwal = br.readLine();
                 kontrakAwal = LocalDate.parse(tanggalInputAwal, DateTimeFormatter.ISO_LOCAL_DATE);
                 break;
