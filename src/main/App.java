@@ -81,7 +81,7 @@ public class App extends menu {
                 String role = login.getRole();
                 switch (role) {
                     case "ADMIN":
-                        menuTambahDetail(pemainInterface, player, statistikPlayer, contract);
+                        menuAdmin(pemainInterface, player, statistikPlayer, contract);
                         break;
                     case "USER":
                         menuUser(pemainInterface, player, statistikPlayer, contract);
@@ -116,7 +116,33 @@ public class App extends menu {
         akunController.regis(username, hash, role);
         pause();
     }
+    private static void menuAdmin(ArrayList<interfacePemain> pemainInterface, ArrayList<pemain> player, ArrayList<statistik> stat, ArrayList<kontrakPemain> contract) throws IOException, ParseException, SQLException {
+        playerController.readPlayer();
+        InputStreamReader isr = new InputStreamReader(System.in);
+        BufferedReader br = new BufferedReader(isr);
+        menu obj = new menu();
+        int pilihan;
 
+        do {
+            clearScreen();
+            obj.menuAdmin();
+            pilihan = Integer.parseInt(br.readLine());
+
+            switch(pilihan) {
+                case 1:
+                    menuTambahDetail(pemainInterface, player, stat, contract);
+                    break;
+                case 2:
+                    menuLihatDetail(pemainInterface, player, stat, contract);
+                    break;
+                case 3:
+                    obj.index();
+                    break;
+                default:
+                    break;
+            }
+        } while (pilihan != 3);
+    }
     private static void menuUser(ArrayList<interfacePemain> pemainInterface, ArrayList<pemain> player, ArrayList<statistik> stat, ArrayList<kontrakPemain> contract) throws IOException, ParseException, SQLException {
         playerController.readPlayer();
         InputStreamReader isr = new InputStreamReader(System.in);
@@ -134,7 +160,7 @@ public class App extends menu {
                     menuLihatDetail(pemainInterface, player, stat, contract);
                     break;
                 case 2:
-                    pause();
+                    obj.index();
                     break;
                 default:
                     break;
@@ -150,6 +176,7 @@ public class App extends menu {
         int pilihan;
         
         do {
+            clearScreen();
             obj.tambahDetail();
             pilihan = Integer.parseInt(br.readLine());
             switch (pilihan) {
@@ -157,33 +184,23 @@ public class App extends menu {
                     tambahPemain();
                     break;
                 case 2:
-                    tampilkanPemain(player);
-                    break;
-                case 3:
                     updatePemain(player);
                     break;
-                case 4:
+                case 3:
                     hapusPemain(player);
                     break;
-                case 5:
-                    lihatStatistik(pemainInterface, player, stat);
-                    break;
-                case 6:
+                case 4:
                     tambahStatistik(player);
                     break;
-                case 7:
-                    lihatKontrakPemain();
-                    break;
-                case 8:
+                case 5:
                     tambahKontrakPemain(player);
                     break;
-                case 9:
-                    pause();
-                    break;
+                case 6:
+                    obj.index();
                 default:
                     break;
             }
-        } while (pilihan != 9);
+        } while (pilihan != 6);
     }
 
     private static void menuLihatDetail(ArrayList<interfacePemain> pemainInterface, ArrayList<pemain> player, ArrayList<statistik> stat, ArrayList<kontrakPemain> contract) throws IOException, ParseException, SQLException {
@@ -210,7 +227,6 @@ public class App extends menu {
                     pause();
                     break;
                 case 4:
-                    pause();
                     break;
                 default:
                     break;
@@ -288,53 +304,52 @@ public class App extends menu {
         
     }
     
+    // private static void lihatKontrakPemain() throws IOException, SQLException {
+    //     kontrakController.readContract();
+    //     InputStreamReader isr = new InputStreamReader(System.in);
+    //     BufferedReader br = new BufferedReader(isr);
+    //     tampilkanPemain(player);
+    //     System.out.print("Masukkan ID Pemain Yang Ingin Dilihat Statistik nya : ");
+    //     int idPemain = Integer.parseInt(br.readLine());
+    //     pemain cekPemain = null;
 
-    private static void lihatKontrakPemain() throws IOException, SQLException {
-        kontrakController.readContract();
-        InputStreamReader isr = new InputStreamReader(System.in);
-        BufferedReader br = new BufferedReader(isr);
-        tampilkanPemain(player);
-        System.out.print("Masukkan ID Pemain Yang Ingin Dilihat Statistik nya : ");
-        int idPemain = Integer.parseInt(br.readLine());
-        pemain cekPemain = null;
-
-        for (pemain cek : player) {
-            if (cek.getIdPemain() == idPemain) {
-                cekPemain = cek;
-                break;
-            }
-        }
+    //     for (pemain cek : player) {
+    //         if (cek.getIdPemain() == idPemain) {
+    //             cekPemain = cek;
+    //             break;
+    //         }
+    //     }
     
-        if (cekPemain == null) {
-            System.out.println("Pemain dengan ID " + idPemain + " tidak ditemukan!!!");
-            return;
-        }
+    //     if (cekPemain == null) {
+    //         System.out.println("Pemain dengan ID " + idPemain + " tidak ditemukan!!!");
+    //         return;
+    //     }
     
-        kontrakPemain kontrak = null;
-        for (kontrakPemain ct : contract) {
-            if (ct.getIdPemain() == idPemain) {
-                kontrak = ct;
-                break;
-            }
-        }
+    //     kontrakPemain kontrak = null;
+    //     for (kontrakPemain ct : contract) {
+    //         if (ct.getIdPemain() == idPemain) {
+    //             kontrak = ct;
+    //             break;
+    //         }
+    //     }
 
-        if (kontrak == null) {
-            System.out.println("Kontrak tidak ditemukan.");
-            return;
-        }
+    //     if (kontrak == null) {
+    //         System.out.println("Kontrak tidak ditemukan.");
+    //         return;
+    //     }
 
-        String namaPemain = kontrak.getNamaPemain(); 
-        LocalDate tanggalMulaiKontrak = kontrak.getTanggalMulaiKontrak();
-        LocalDate tanggalAkhirKontrak = kontrak.getTanggalAkhirKontrak();
-        double nilaiKontrak = kontrak.getNilaiKontrak();
-        double klausulPelepasan = kontrak.getKlausulPelepasan();
-        System.out.println("=============================================================================================================");
-        System.out.printf("|%-23s| %-21s| %-22s| %-15s| %-18s| %n", "Nama Pemain", "Tanggal Awal Kontrak", "Tanggal Akhir Kontrak", "Nilai Kontrak", "Klausul Pelepasan" );
-        System.out.println("=============================================================================================================");
-        System.out.printf("|%-23s| %-21s| %-22s| %-15.2f| %-18.2f| %n", namaPemain, tanggalMulaiKontrak, tanggalAkhirKontrak, nilaiKontrak, klausulPelepasan);
-        System.out.println("=============================================================================================================");
+    //     String namaPemain = kontrak.getNamaPemain(); 
+    //     LocalDate tanggalMulaiKontrak = kontrak.getTanggalMulaiKontrak();
+    //     LocalDate tanggalAkhirKontrak = kontrak.getTanggalAkhirKontrak();
+    //     double nilaiKontrak = kontrak.getNilaiKontrak();
+    //     double klausulPelepasan = kontrak.getKlausulPelepasan();
+    //     System.out.println("=============================================================================================================");
+    //     System.out.printf("|%-23s| %-21s| %-22s| %-15s| %-18s| %n", "Nama Pemain", "Tanggal Awal Kontrak", "Tanggal Akhir Kontrak", "Nilai Kontrak", "Klausul Pelepasan" );
+    //     System.out.println("=============================================================================================================");
+    //     System.out.printf("|%-23s| %-21s| %-22s| %-15.2f| %-18.2f| %n", namaPemain, tanggalMulaiKontrak, tanggalAkhirKontrak, nilaiKontrak, klausulPelepasan);
+    //     System.out.println("=============================================================================================================");
         
-    }
+    // }
 
     private static void tambahPemain() throws IOException, SQLException {
         InputStreamReader isr = new InputStreamReader(System.in);
