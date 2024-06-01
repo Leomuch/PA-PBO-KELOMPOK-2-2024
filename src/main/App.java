@@ -371,7 +371,7 @@ public class App extends menu {
             if (namaPemain.matches("[a-zA-Z\\s]+")) {
                 break;
             } else {
-                System.out.println("Nama pemain hanya boleh mengandung huruf dan spasi. Silakan coba lagi.");
+                System.out.println("Nama pemain hanya boleh mengandung huruf dan spasi. Silakan coba lagi!");
             }
         }
     
@@ -382,7 +382,7 @@ public class App extends menu {
             if (asalKlub.matches("[a-zA-Z\\s]+")) {
                 break;
             } else {
-                System.out.println("Asal klub hanya boleh mengandung huruf dan spasi. Silakan coba lagi.");
+                System.out.println("Asal klub hanya boleh mengandung huruf dan spasi. Silakan coba lagi!");
             }
         }
 
