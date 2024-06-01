@@ -41,8 +41,6 @@ public class App extends menu {
                     regis();
                     break;
                 case 3:
-                    exit str = new exit();
-                    str.exitProgram();
                     System.exit(0);
                 default:
                     break;
