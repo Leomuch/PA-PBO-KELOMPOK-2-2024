@@ -403,18 +403,40 @@ public class App extends menu {
         String namaPemain = cekPemain.getNamaPemain();
         System.out.print("Masukkan Posisi Pemain : ");
         String posisi = br.readLine();
-        System.out.print("Masukkan Jumlah Gol    : ");
-        int gol = Integer.parseInt(br.readLine());
-        System.out.print("Masukkan Jumlah Assist : ");
-        int assist = Integer.parseInt(br.readLine());
-        System.out.print("Masukkan Jumlah Match  : ");
-        int match = Integer.parseInt(br.readLine());
+    
+        int gol = -1;
+        while (gol < 0) {
+            System.out.print("Masukkan Jumlah Gol    : ");
+            gol = Integer.parseInt(br.readLine());
+            if (gol < 0) {
+                System.out.println("Jumlah gol tidak boleh negatif. Silakan masukkan ulang.");
+            }
+        }
+    
+        int assist = -1;
+        while (assist < 0) {
+            System.out.print("Masukkan Jumlah Assist : ");
+            assist = Integer.parseInt(br.readLine());
+            if (assist < 0) {
+                System.out.println("Jumlah assist tidak boleh negatif. Silakan masukkan ulang.");
+            }
+        }
+    
+        int match = -1;
+        while (match < 0) {
+            System.out.print("Masukkan Jumlah Match  : ");
+            match = Integer.parseInt(br.readLine());
+            if (match < 0) {
+                System.out.println("Jumlah match tidak boleh negatif. Silakan masukkan ulang.");
+            }
+        }
         
         statistikController.addStatistik(posisi, gol, assist, match, idPemain, namaPemain);
         
         System.out.println("Statistik Pemain Berhasil Ditambahkan");
         pause();
     }
+    
     
     private static void tambahKontrakPemain(ArrayList<pemain> player) throws IOException, SQLException {
         InputStreamReader isr = new InputStreamReader(System.in);
