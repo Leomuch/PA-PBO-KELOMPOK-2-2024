@@ -242,19 +242,18 @@ public class App extends menu {
             System.out.println("Belum Ada Data Pemain");
             pause();
         } else {
-            System.out.println("======================================================================================================");
-            System.out.printf("|%-4s| %-25s| %-25s| %-15s| %-6s| %-15s| %n", "No", "Nama Pemain", "Asal Klub", "Tanggal Lahir", "Umur", "Negara" );
-            System.out.println("======================================================================================================");
+            System.out.println("=====================================================================================");
+            System.out.printf("|%-4s| %-25s| %-25s| %-15s| %-6s| %n", "No", "Nama Pemain", "Asal Klub", "Tanggal Lahir", "Umur" );
+            System.out.println("=====================================================================================");
             for (int i = 0; i < player.size(); i++) {
                 pemain plyr = player.get(i);
                 String namaPemain = plyr.getNamaPemain();
+                int umur = plyr.getUmur();
                 String asalKlub = plyr.getAsalKlub();
                 LocalDate tanggalLahir = plyr.getTanggalLahir();
-                int umur = plyr.getUmur();
-                String negara = plyr.getNegara();
-                System.out.printf("|%-4d| %-25s| %-25s| %-15s| %-6d| %-15s| %n", i + 1, namaPemain, asalKlub, tanggalLahir, umur, negara);
+                System.out.printf("|%-4d| %-25s| %-25s| %-15s| %-6d| %n", i + 1, namaPemain, asalKlub, tanggalLahir, umur);
             }
-            System.out.println("======================================================================================================");
+            System.out.println("=====================================================================================");
         }
     }
     
@@ -372,7 +371,7 @@ public class App extends menu {
             if (namaPemain.matches("[a-zA-Z\\s]+")) {
                 break;
             } else {
-                System.out.println("Nama pemain hanya boleh mengandung huruf dan spasi. Silakan coba lagi!");
+                System.out.println("Nama pemain hanya boleh mengandung huruf dan spasi. Silakan coba lagi.");
             }
         }
     
@@ -383,7 +382,7 @@ public class App extends menu {
             if (asalKlub.matches("[a-zA-Z\\s]+")) {
                 break;
             } else {
-                System.out.println("Asal klub hanya boleh mengandung huruf dan spasi. Silakan coba lagi!");
+                System.out.println("Asal klub hanya boleh mengandung huruf dan spasi. Silakan coba lagi.");
             }
         }
 
@@ -504,7 +503,7 @@ public class App extends menu {
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
         tampilkanPemain(player);
-        System.out.print("Masukkan ID Pemain          : ");
+        System.out.print("Masukkan ID Pemain     : ");
         int idPemain = Integer.parseInt(br.readLine());
         pemain cekPemain = null;
         for (pemain cek : player) {
@@ -523,7 +522,7 @@ public class App extends menu {
         LocalDate kontrakAwal = null;
         while (true) {
             try {
-                System.out.print("Masukkan Tanggal Awal Kontrak (YYYY-MM-DD)  : ");
+                System.out.print("Masukkan Tanggal Awal Kontrak (YYYY-MM-DD) : ");
                 String tanggalInputAwal = br.readLine();
                 kontrakAwal = LocalDate.parse(tanggalInputAwal, DateTimeFormatter.ISO_LOCAL_DATE);
                 break;
