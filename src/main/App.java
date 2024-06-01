@@ -472,13 +472,30 @@ public class App extends menu {
                 System.out.println("Jumlah match tidak boleh negatif. Silakan masukkan ulang.");
             }
         }
-        
-
-        statistikController.addStatistik(posisi, gol, assist, match, idPemain, namaPemain);
-        
+    
+        boolean idPlayerExists = statistikController.checkStatistikExist(idPemain);
+        if (idPlayerExists) {
+            System.out.println("Data Statistik Pemain Tersebut Sudah Ada");
+            System.out.print("Data sudah ada. Ingin menambah data baru (1) atau mengedit (2)? Masukkan pilihan: ");
+            int pilihan = Integer.parseInt(br.readLine());
+    
+            if (pilihan == 1) {
+                statistikController.addStatistik(posisi, gol, assist, match, idPemain, namaPemain);
+            } else if (pilihan == 2) {
+                // Logika untuk memperbarui data
+                statistikController.updateStatistik(idPemain);
+            } else {
+                System.out.println("Pilihan tidak valid.");
+            }
+        } else {
+            // Logika untuk menambah data baru
+            statistikController.addStatistik(posisi, gol, assist, match, idPemain, namaPemain);
+        }
+    
         System.out.println("Statistik Pemain Berhasil Ditambahkan");
         pause();
-    }    
+    }
+    
     
     private static void tambahKontrakPemain(ArrayList<pemain> player) throws IOException, SQLException {
         clearScreen();
