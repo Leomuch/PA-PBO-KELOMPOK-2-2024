@@ -55,22 +55,6 @@ public class kontrakController {
             System.out.println("Gagal mengecek.");
             e.printStackTrace();
         }
-    
-        if (idPlayerExists) {
-            System.out.println("Data Kontrak Pemain Tersebut Sudah Ada");
-            System.out.print("Data sudah ada. Ingin menambah data lain (1) atau mengedit (2)? Masukkan pilihan: ");
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-            int pilihan = Integer.parseInt(br.readLine());
-    
-            if (pilihan == 1) {
-                // Logika untuk menambah data yang lain
-                // ...
-            } else if (pilihan == 2) {
-                // updateStatistik(idPemain);
-            } else {
-                System.out.println("Pilihan tidak valid.");
-            }
-        } else {
             // Logika untuk menambah data baru ke database
             String query = "INSERT INTO kontrakPemain (kontrakAwal, kontrakAkhir, nilaiKontrak, klausulPelepasan, idPemain, namaPemain) VALUES (?, ?, ?, ?, ?, ?)";
             try {
@@ -96,4 +80,3 @@ public class kontrakController {
             }
         }
     }        
-}
