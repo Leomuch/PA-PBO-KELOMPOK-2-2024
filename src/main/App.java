@@ -309,7 +309,7 @@ public class App extends menu {
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
         tampilkanPemain(player);
-        System.out.print("Masukkan ID Pemain Yang Ingin Dilihat Statistik nya : ");
+        System.out.print("Masukkan ID Pemain Yang Ingin Dilihat Kontrak nya : ");
         int idPemain = Integer.parseInt(br.readLine());
         pemain cekPemain = null;
 
