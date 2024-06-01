@@ -458,14 +458,7 @@ public class App extends menu {
                 // Logika untuk memperbarui data
                 statistikController.updateStatistik(idPemain);
             } else if (pilihan == 2) {
-                // Logika untuk menambah data baru
-                // Meminta input untuk data baru
-                System.out.print("Masukkan Posisi Pemain : ");
-                String posisi = br.readLine();
-                int gol = getInput("Masukkan Jumlah Gol    : ");
-                int assist = getInput("Masukkan Jumlah Assist : ");
-                int match = getInput("Masukkan Jumlah Match  : ");
-                statistikController.addStatistik(posisi, gol, assist, match, idPemain, namaPemain);
+                tambahStatistik(player);
             } else {
                 System.out.println("Pilihan tidak valid.");
             }
