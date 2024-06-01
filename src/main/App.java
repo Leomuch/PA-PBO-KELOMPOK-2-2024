@@ -117,7 +117,6 @@ public class App extends menu {
         pause();
     }
     private static void menuAdmin(ArrayList<interfacePemain> pemainInterface, ArrayList<pemain> player, ArrayList<statistik> stat, ArrayList<kontrakPemain> contract) throws IOException, ParseException, SQLException {
-        playerController.readPlayer();
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
         menu obj = new menu();
