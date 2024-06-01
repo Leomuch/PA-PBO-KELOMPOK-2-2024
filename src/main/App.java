@@ -428,12 +428,8 @@ public class App extends menu {
             pause();
             return;
         }
-<<<<<<< HEAD
         String namaPemain = cekPemain.getNamaPemain();
         System.out.println(namaPemain);
-=======
-        // String namaPemain = cekPemain.getNamaPemain();
->>>>>>> bce0b7fcaee0412878c06960f58c504b0ab5b454
         System.out.print("Masukkan Posisi Pemain : ");
         String posisi = br.readLine();
     
@@ -464,12 +460,8 @@ public class App extends menu {
             }
         }
         
-<<<<<<< HEAD
 
         statistikController.addStatistik(posisi, gol, assist, match, idPemain, namaPemain);
-=======
-        statistikController.addStatistik(posisi, gol, assist, match, idPemain);
->>>>>>> bce0b7fcaee0412878c06960f58c504b0ab5b454
         
         System.out.println("Statistik Pemain Berhasil Ditambahkan");
         pause();
