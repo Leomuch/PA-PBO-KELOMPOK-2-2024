@@ -44,4 +44,25 @@ public class menu {
         System.out.println("==========================");
         System.out.print("Pilihan : ");
     }
+
+    protected void menuAdmin() {
+        System.out.println("==========================");
+        System.out.println("||      ADMIN MENU      ||");
+        System.out.println("==========================");
+        System.out.println("||  1. Manajemen Data   ||");
+        System.out.println("||  2. Data Pemain      ||");
+        System.out.println("||  3. Kembali          ||");
+        System.out.println("==========================");
+        System.out.print("Pilihan : ");
+    }
+    
+    protected void menuUser() {
+        System.out.println("============================");
+        System.out.println("||        USER MENU       ||");
+        System.out.println("============================");
+        System.out.println("||  1. Lihat Data Pemain  ||");
+        System.out.println("||  2. Kembali            ||");
+        System.out.println("============================");
+        System.out.print("Pilihan : ");
+    }
 }
