@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 01, 2024 at 12:59 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Jun 01, 2024 at 04:02 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -61,7 +61,8 @@ CREATE TABLE `kontrakpemain` (
   `kontrakAkhir` date NOT NULL,
   `nilaiKontrak` double NOT NULL,
   `klausulPelepasan` double NOT NULL,
-  `idPemain` int(11) NOT NULL
+  `idPemain` int(11) NOT NULL,
+  `namaPemain` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -114,8 +115,16 @@ CREATE TABLE `statistik` (
   `posisi` varchar(255) NOT NULL,
   `gol` int(11) NOT NULL,
   `assist` int(11) NOT NULL,
-  `match` int(11) NOT NULL
+  `match` int(11) NOT NULL,
+  `namaPemain` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `statistik`
+--
+
+INSERT INTO `statistik` (`idPemain`, `posisi`, `gol`, `assist`, `match`, `namaPemain`) VALUES
+(4, 'Gelandang', 20, 5, 30, 'Jude Bellingham');
 
 --
 -- Indexes for dumped tables
