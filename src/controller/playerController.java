@@ -24,8 +24,22 @@ public class playerController {
                 tanggalLahir = db.resultSet.getDate("tanggalLahir").toLocalDate();
                 umur = Period.between(tanggalLahir, LocalDate.now()).getYears();
                 umur = db.resultSet.getInt("umur");
-                pemain newPlayer = new pemain(idPemain, namaPemain, asalKlub, tanggalLahir, umur);
-                App.player.add(newPlayer);
+                boolean Exists = false;
+                for (pemain existingData : App.player) {
+                    if (existingData.getIdPemain() == idPemain) {
+                        existingData.setNamaPemain(namaPemain);
+                        existingData.setAsalKlub(asalKlub);
+                        existingData.setTanggalLahir(tanggalLahir);
+                        existingData.setUmur(umur);
+                        Exists = true;
+                        break;
+                    }
+                }
+                // App.player.clear();
+                if (!Exists) {
+                    pemain newPlayer = new pemain(idPemain, namaPemain, asalKlub, tanggalLahir, umur);
+                    App.player.add(newPlayer);
+                }
             }
         } catch (SQLException e) {
             System.out.println("Gagal Membaca Data Pemain");
