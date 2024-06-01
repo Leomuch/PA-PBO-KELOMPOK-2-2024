@@ -166,7 +166,7 @@ public class App extends menu {
                     hapusPemain(player);
                     break;
                 case 5:
-                    lihatStatistik();
+                    lihatStatistik(pemainInterface, player, stat);
                     break;
                 case 6:
                     tambahStatistik(player);
@@ -203,7 +203,7 @@ public class App extends menu {
                     pause();
                     break;
                     case 2:
-                    // lihatStatistik(pemainInterface, player, stat);               
+                    lihatStatistik(pemainInterface, player, stat);               
                     pause();
                     break;
                     case 3:
@@ -240,7 +240,7 @@ public class App extends menu {
         }
     }
     
-    private static void lihatStatistik() throws IOException, SQLException {
+    private static void lihatStatistik(ArrayList<interfacePemain> pemainInterface, ArrayList<pemain> player, ArrayList<statistik> stateList) throws IOException, SQLException {
         statistikController.readStatistics();
         System.out.println("Daftar Pemain saat ini:");
         InputStreamReader isr = new InputStreamReader(System.in);
