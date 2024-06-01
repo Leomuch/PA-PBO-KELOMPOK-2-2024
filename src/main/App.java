@@ -256,6 +256,7 @@ public class App extends menu {
     }
     
     private static void lihatStatistik(ArrayList<interfacePemain> pemainInterface, ArrayList<pemain> player, ArrayList<statistik> stateList) throws IOException, SQLException {
+        clearScreen();
         statistikController.readStatistics();
         System.out.println("Daftar Pemain saat ini : ");
         InputStreamReader isr = new InputStreamReader(System.in);
@@ -305,6 +306,7 @@ public class App extends menu {
     }
     
     private static void lihatKontrakPemain(ArrayList<interfacePemain> pemainInterface, ArrayList<pemain> player, ArrayList<kontrakPemain> contractList) throws IOException, SQLException {
+        clearScreen();
         kontrakController.readContract();
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
@@ -352,6 +354,8 @@ public class App extends menu {
     }
 
     private static void tambahPemain() throws IOException, SQLException {
+        clearScreen();
+        playerController.readPlayer();
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
         String namaPemain, asalKlub;
@@ -405,6 +409,7 @@ public class App extends menu {
     
 
     private static void tambahStatistik(ArrayList<pemain> player) throws IOException, SQLException {
+        clearScreen();
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
         tampilkanPemain(player);
@@ -421,7 +426,7 @@ public class App extends menu {
             System.out.println("Pemain dengan ID tersebut tidak ditemukan!!!");
             return;
         }
-        String namaPemain = cekPemain.getNamaPemain();
+        // String namaPemain = cekPemain.getNamaPemain();
         System.out.print("Masukkan Posisi Pemain : ");
         String posisi = br.readLine();
     
@@ -452,14 +457,14 @@ public class App extends menu {
             }
         }
         
-        statistikController.addStatistik(posisi, gol, assist, match, idPemain, namaPemain);
+        statistikController.addStatistik(posisi, gol, assist, match, idPemain);
         
         System.out.println("Statistik Pemain Berhasil Ditambahkan");
         pause();
-    }
-    
+    }    
     
     private static void tambahKontrakPemain(ArrayList<pemain> player) throws IOException, SQLException {
+        clearScreen();
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
         tampilkanPemain(player);
@@ -494,6 +499,7 @@ public class App extends menu {
     }
 
     private static void updatePemain(ArrayList<pemain> player) throws IOException, SQLException {
+        clearScreen();
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
         String newNamePlayer, newClub;
@@ -542,6 +548,7 @@ public class App extends menu {
     }
 
     private static void hapusPemain(ArrayList<pemain> player) throws IOException, SQLException {
+        clearScreen();
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
         System.out.println("Hapus Data Pemain");
