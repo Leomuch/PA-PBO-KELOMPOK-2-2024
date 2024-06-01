@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 31, 2024 at 09:03 PM
+-- Generation Time: Jun 01, 2024 at 02:58 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -60,8 +60,16 @@ CREATE TABLE `kontrakpemain` (
   `kontrakAkhir` date NOT NULL,
   `nilaiKontrak` double NOT NULL,
   `klausulPelepasan` double NOT NULL,
-  `idPemain` int(11) NOT NULL
+  `idPemain` int(11) NOT NULL,
+  `namaPemain` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `kontrakpemain`
+--
+
+INSERT INTO `kontrakpemain` (`kontrakAwal`, `kontrakAkhir`, `nilaiKontrak`, `klausulPelepasan`, `idPemain`, `namaPemain`) VALUES
+('2023-08-08', '2024-08-08', 450000, 450000, 1, 'Kylian Mbappe');
 
 -- --------------------------------------------------------
 
@@ -82,7 +90,7 @@ CREATE TABLE `pemain` (
 --
 
 INSERT INTO `pemain` (`idPemain`, `namaPemain`, `asalKlub`, `tanggalLahir`, `umur`) VALUES
-(1, 'Kylian Mbappe', 'PSG', '1998-12-20', 25),
+(1, 'Kylian Mbappe', 'PSG', '1987-12-20', 25),
 (2, 'Lionel Messi', 'Inter Miami', '1987-06-24', 36),
 (3, 'Frenkie De Jong', 'Barcelona', '1997-05-12', 27);
 
@@ -97,20 +105,18 @@ CREATE TABLE `statistik` (
   `gol` int(11) NOT NULL,
   `assist` int(11) NOT NULL,
   `match` int(11) NOT NULL,
-  `idPemain` int(11) NOT NULL
+  `idPemain` int(11) NOT NULL,
+  `namaPemain` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `statistik`
 --
 
-INSERT INTO `statistik` (`posisi`, `gol`, `assist`, `match`, `idPemain`) VALUES
-('1', 1, 1, 1, 1),
-('1', 1, 1, 1, 1),
-('1', 1, 1, 1, 1),
-('1', 1, 1, 1, 1),
-('1', 1, 1, 1, 1),
-('1', 1, 1, 1, 1);
+INSERT INTO `statistik` (`posisi`, `gol`, `assist`, `match`, `idPemain`, `namaPemain`) VALUES
+('Striker', 20, 25, 20, 1, 'Kylian Mbappe'),
+('Striker', 35, 30, 25, 2, 'Lionel Messi'),
+('Gelandang', 5, 9, 25, 3, 'Frenkie De Jong');
 
 --
 -- Indexes for dumped tables
@@ -123,10 +129,22 @@ ALTER TABLE `akun`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `kontrakpemain`
+--
+ALTER TABLE `kontrakpemain`
+  ADD UNIQUE KEY `idPemain` (`idPemain`);
+
+--
 -- Indexes for table `pemain`
 --
 ALTER TABLE `pemain`
   ADD PRIMARY KEY (`idPemain`);
+
+--
+-- Indexes for table `statistik`
+--
+ALTER TABLE `statistik`
+  ADD UNIQUE KEY `idPemain` (`idPemain`);
 
 --
 -- AUTO_INCREMENT for dumped tables
