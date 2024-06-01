@@ -5,12 +5,20 @@ public class statistik{
     private int gol;
     private int assist;
     private int match;
+    private int idPemain;
+    String namaPemain;
 
-    public statistik(String posisi, int gol, int assist, int match) {
+    public statistik(String posisi, int gol, int assist, int match, int idPemain, String namaPemain) {
         this.posisi = posisi;
         this.gol = gol;
         this.assist = assist;
         this.match = match;
+        this.idPemain = idPemain;
+        this.namaPemain = namaPemain;
+    }
+
+    public int getIdPemain() {
+        return idPemain;
     }
     
     public String getPosisi() {
@@ -29,6 +37,14 @@ public class statistik{
         return match;
     }
 
+    public String getNamaPemain() {
+        return namaPemain;
+    }
+
+    public void setIdPemain(int idPemain) {
+        this.idPemain = idPemain;
+    }
+
     public void setPosisi(String posisi) {
         this.posisi = posisi;
     }
@@ -43,5 +59,9 @@ public class statistik{
 
     public void setMatch(int match) {
         this.match = match;
+    }
+
+    public void setNamaPemain(String namaPemain) {
+        this.namaPemain = namaPemain;
     }
 }

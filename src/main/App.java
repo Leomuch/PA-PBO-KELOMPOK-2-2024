@@ -153,20 +153,18 @@ public class App extends menu {
                     hapusPemain(player);
                     break;
                 case 5:
-                    if (player.isEmpty()) {
-                        System.out.println("Belum Ada Data Pemain");
-                        break;
-                    } else {
-                        // updateNilaiKontrak(pemainInterface, player, contract);
-                    }
+                    lihatStatistik(player);
                     break;
                 case 6:
+                    tambahStatistik(player);
+                    break;
+                case 7:
                     pause();
                     break;
                 default:
                     break;
             }
-        } while (pilihan != 6);
+        } while (pilihan != 7);
     }
 
     @SuppressWarnings("unused")
@@ -222,55 +220,55 @@ public class App extends menu {
             System.out.println("===========================================================================");
         }
     }
-
-
     
-    // private static void lihatStatistik(ArrayList<interfacePemain> pemainInterface, ArrayList<pemain> player, ArrayList<statistik> stateList) throws IOException {
-    //     InputStreamReader isr = new InputStreamReader(System.in);
-    //     BufferedReader br = new BufferedReader(isr);
-    //     tampilkanPemain(player, pemainInterface);
-    //     System.out.print("Masukkan ID Pemain Yang Ingin Dilihat Statistik nya : ");
-    //     int idPemain = Integer.parseInt(br.readLine());
-    //     pemain cekPemain = null;
+    private static void lihatStatistik(ArrayList<pemain> player) throws IOException, SQLException {
+        statistikController.readStatistics();
+        System.out.println("Daftar Pemain saat ini:");
+        InputStreamReader isr = new InputStreamReader(System.in);
+        BufferedReader br = new BufferedReader(isr);
+        tampilkanPemain(player);
+        System.out.print("Masukkan ID Pemain Yang Ingin Dilihat Statistik nya : ");
+        int idPemain = Integer.parseInt(br.readLine());
+        pemain cekPemain = null;
 
-    //     for (pemain cek : player) {
-    //         if (cek.getIdPemain() == idPemain) {
-    //             cekPemain = cek;
-    //             break;
-    //         }
-    //     }
+        for (pemain cek : player) {
+            if (cek.getIdPemain() == idPemain) {
+                cekPemain = cek;
+                break;
+            }
+        }
 
-    //     if (cekPemain == null) {
-    //         System.out.println("Pemain dengan ID " + idPemain + " tidak ditemukan!!!");
-    //         return;
-    //     }
+        if (cekPemain == null) {
+            System.out.println("Pemain dengan ID " + idPemain + " tidak ditemukan!!!");
+            return;
+        }
 
-    //     statistik state = null;
-    //     for (statistik st : stateList) {
-    //         if (st.getIdPemain() == idPemain) {
-    //             state = st;
-    //             break;
-    //         }
-    //     }
+        statistik state = null;
+        for (statistik st : statistikPlayer) {
+            if (st.getIdPemain() == idPemain) {
+                state = st;
+                break;
+            }
+        }
 
-    //     if (state == null) {
-    //         System.out.println("Statistik Tidak Ditemukan");
-    //         return;
-    //     }
+        if (state == null) {
+            System.out.println("Statistik Tidak Ditemukan");
+            return;
+        }
 
-    //     String namaPemain = state.getNamaPemain(); 
-    //     String posisi = state.getPosisi();
-    //     int gol = state.getGol();
-    //     int assist = state.getAssist();
-    //     int match = state.getMatch();
+        String namaPemain = state.getNamaPemain(); 
+        String posisi = state.getPosisi();
+        int gol = state.getGol();
+        int assist = state.getAssist();
+        int match = state.getMatch();
 
-    //     System.out.println("==========================================================================");
-    //     System.out.printf("|%-25s| %-15s| %-8s| %-8s| %-8s| %n", "Nama Pemain", "Posisi", "Match", "Gol", "Assist" );
-    //     System.out.println("==========================================================================");
-    //     System.out.printf("|%-25s| %-15s| %-8d| %-8d| %-8d| %n", namaPemain, posisi, match, gol, assist );
-    //     System.out.println("==========================================================================");
+        System.out.println("==========================================================================");
+        System.out.printf("|%-25s| %-15s| %-8s| %-8s| %-8s| %n", "Nama Pemain", "Posisi", "Match", "Gol", "Assist" );
+        System.out.println("==========================================================================");
+        System.out.printf("|%-25s| %-15s| %-8d| %-8d| %-8d| %n", namaPemain, posisi, match, gol, assist );
+        System.out.println("==========================================================================");
         
-    // }
+    }
     
 
     // private static void lihatKontrakPemain(ArrayList<interfacePemain> pemainInterface, ArrayList<pemain> player, ArrayList<kontrakPemain> contractList) throws IOException{
@@ -354,39 +352,39 @@ public class App extends menu {
         pause();
     }
 
-    // private static void tambahStatistik(ArrayList<statistik> stat, ArrayList<pemain> player) throws IOException {
-    //     InputStreamReader isr = new InputStreamReader(System.in);
-    //     BufferedReader br = new BufferedReader(isr);
-    //     System.out.print("Masukkan ID Pemain     : ");
-    //     int idPemain = Integer.parseInt(br.readLine());
-    //     pemain cekPemain = null;
-    //     for (pemain cek : player) {
-    //         if (cek.getIdPemain() == idPemain) {
-    //             cekPemain = cek;
-    //             break;
-    //         }
-    //     }
-    //     if (cekPemain == null) {
-    //         System.out.println("Pemain dengan ID tersebut tidak ditemukan!!!");
-    //         return;
-    //     }
-    //     String namaPemain = cekPemain.getNamaPemain();
-    //     // String asalKlub = cekPemain.getAsalKlub();
-    //     int umur = cekPemain.getUmur();
-    //     // double marketValue = cekPemain.getMarketValue();
-    //     System.out.print("Masukkan Posisi Pemain : ");
-    //     String posisi = br.readLine();
-    //     System.out.print("Masukkan Jumlah Gol    : ");
-    //     int gol = Integer.parseInt(br.readLine());
-    //     System.out.print("Masukkan Jumlah Assist : ");
-    //     int assist = Integer.parseInt(br.readLine());
-    //     System.out.print("Masukkan Jumlah Match  : ");
-    //     int match = Integer.parseInt(br.readLine());
-    //     statistik statBaru = new statistik(umur, namaPemain, idPemain, posisi, gol, assist, match);
-    //     stat.add(statBaru);
-    //     System.out.println("Statistik Pemain Berhasil Ditambahkan");
-    //     pause();
-    // }
+    private static void tambahStatistik(ArrayList<pemain> player) throws IOException, SQLException {
+        InputStreamReader isr = new InputStreamReader(System.in);
+        BufferedReader br = new BufferedReader(isr);
+        tampilkanPemain(player);
+        System.out.print("Masukkan ID Pemain     : ");
+        int idPemain = Integer.parseInt(br.readLine());
+        pemain cekPemain = null;
+        for (pemain cek : player) {
+            if (cek.getIdPemain() == idPemain) {
+                cekPemain = cek;
+                break;
+            }
+        }
+        if (cekPemain == null) {
+            System.out.println("Pemain dengan ID tersebut tidak ditemukan!!!");
+            return;
+        }
+        String namaPemain = cekPemain.getNamaPemain();
+        System.out.print("Masukkan Posisi Pemain : ");
+        String posisi = br.readLine();
+        System.out.print("Masukkan Jumlah Gol    : ");
+        int gol = Integer.parseInt(br.readLine());
+        System.out.print("Masukkan Jumlah Assist : ");
+        int assist = Integer.parseInt(br.readLine());
+        System.out.print("Masukkan Jumlah Match  : ");
+        int match = Integer.parseInt(br.readLine());
+    
+        statistikController.addStatistik(posisi, gol, assist, match, idPemain, namaPemain);
+    
+        System.out.println("Statistik Pemain Berhasil Ditambahkan");
+        pause();
+    }
+    
 
     // private static void tambahKontrakPemain(ArrayList<kontrakPemain> contract, ArrayList<pemain> player) throws IOException, ParseException {
     //     InputStreamReader isr = new InputStreamReader(System.in);

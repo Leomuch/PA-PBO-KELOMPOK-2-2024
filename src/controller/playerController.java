@@ -13,17 +13,18 @@ public class playerController {
         String query = "SELECT * FROM pemain";
         String namaPemain, asalKlub;
         LocalDate tanggalLahir;
-        int umur;
+        int umur, idPemain;
         try {
             db.preparedStatement = (PreparedStatement) db.conn.prepareStatement(query);
             db.resultSet = db.preparedStatement.executeQuery();
             while (db.resultSet.next()) {
+                idPemain = db.resultSet.getInt("idPemain");
                 namaPemain = db.resultSet.getString("namaPemain");
                 asalKlub = db.resultSet.getString("asalKlub");
                 tanggalLahir = db.resultSet.getDate("tanggalLahir").toLocalDate();
                 umur = Period.between(tanggalLahir, LocalDate.now()).getYears();
                 umur = db.resultSet.getInt("umur");
-                pemain newPlayer = new pemain(0, namaPemain, asalKlub, tanggalLahir, umur);
+                pemain newPlayer = new pemain(idPemain, namaPemain, asalKlub, tanggalLahir, umur);
                 App.player.add(newPlayer);
             }
         } catch (SQLException e) {
