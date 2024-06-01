@@ -248,9 +248,9 @@ public class App extends menu {
             for (int i = 0; i < player.size(); i++) {
                 pemain plyr = player.get(i);
                 String namaPemain = plyr.getNamaPemain();
-                int umur = plyr.getUmur();
                 String asalKlub = plyr.getAsalKlub();
                 LocalDate tanggalLahir = plyr.getTanggalLahir();
+                int umur = plyr.getUmur();
                 String negara = plyr.getNegara();
                 System.out.printf("|%-4d| %-25s| %-25s| %-15s| %-6d| %-15s| %n", i + 1, namaPemain, asalKlub, tanggalLahir, umur, negara);
             }
