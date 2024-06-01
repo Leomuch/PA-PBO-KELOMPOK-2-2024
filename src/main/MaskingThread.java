@@ -1,4 +1,5 @@
 package main;
+
 class MaskingThread extends Thread {
     private volatile boolean stop;
     private char echochar = '*';

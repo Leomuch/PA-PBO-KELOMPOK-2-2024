@@ -241,22 +241,23 @@ public class App extends menu {
             System.out.println("Belum Ada Data Pemain");
             pause();
         } else {
-            System.out.println("===========================================================================");
-            System.out.printf("|%-4s| %-25s| %-15s| %-15s| %-6s| %n", "No", "Nama Pemain", "Asal Klub", "Tanggal Lahir", "Umur" );
-            System.out.println("===========================================================================");
+            System.out.println("=====================================================================================");
+            System.out.printf("|%-4s| %-25s| %-25s| %-15s| %-6s| %n", "No", "Nama Pemain", "Asal Klub", "Tanggal Lahir", "Umur" );
+            System.out.println("=====================================================================================");
             for (int i = 0; i < player.size(); i++) {
                 pemain plyr = player.get(i);
                 String namaPemain = plyr.getNamaPemain();
                 int umur = plyr.getUmur();
                 String asalKlub = plyr.getAsalKlub();
                 LocalDate tanggalLahir = plyr.getTanggalLahir();
-                System.out.printf("|%-4d| %-25s| %-15s| %-15s| %-6d| %n", i + 1, namaPemain, asalKlub, tanggalLahir, umur);
+                System.out.printf("|%-4d| %-25s| %-25s| %-15s| %-6d| %n", i + 1, namaPemain, asalKlub, tanggalLahir, umur);
             }
-            System.out.println("===========================================================================");
+            System.out.println("=====================================================================================");
         }
     }
     
     private static void lihatStatistik(ArrayList<interfacePemain> pemainInterface, ArrayList<pemain> player, ArrayList<statistik> stateList) throws IOException, SQLException {
+        clearScreen();
         statistikController.readStatistics();
         System.out.println("Daftar Pemain saat ini : ");
         InputStreamReader isr = new InputStreamReader(System.in);
@@ -306,11 +307,12 @@ public class App extends menu {
     }
     
     private static void lihatKontrakPemain(ArrayList<interfacePemain> pemainInterface, ArrayList<pemain> player, ArrayList<kontrakPemain> contractList) throws IOException, SQLException {
+        clearScreen();
         kontrakController.readContract();
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
         tampilkanPemain(player);
-        System.out.print("Masukkan ID Pemain Yang Ingin Dilihat Statistik nya : ");
+        System.out.print("Masukkan ID Pemain Yang Ingin Dilihat Kontrak nya : ");
         int idPemain = Integer.parseInt(br.readLine());
         pemain cekPemain = null;
 
@@ -353,38 +355,62 @@ public class App extends menu {
     }
 
     private static void tambahPemain() throws IOException, SQLException {
+        clearScreen();
+        playerController.readPlayer();
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
         String namaPemain, asalKlub;
         LocalDate tanggalLahir;
         int umur;
-        System.out.print("Masukkan Nama Pemain  : ");
-        namaPemain = br.readLine();
-        System.out.print("Masukkan Asal Klub    : ");
-        asalKlub = br.readLine();
+    
+        // Validasi nama pemain
+        while (true) {
+            System.out.print("Masukkan Nama Pemain  : ");
+            namaPemain = br.readLine();
+            if (namaPemain.matches("[a-zA-Z\\s]+")) {
+                break;
+            } else {
+                System.out.println("Nama pemain hanya boleh mengandung huruf dan spasi. Silakan coba lagi.");
+            }
+        }
+    
+        // Validasi asal klub
+        while (true) {
+            System.out.print("Masukkan Asal Klub    : ");
+            asalKlub = br.readLine();
+            if (asalKlub.matches("[a-zA-Z\\s]+")) {
+                break;
+            } else {
+                System.out.println("Asal klub hanya boleh mengandung huruf dan spasi. Silakan coba lagi.");
+            }
+        }
+    
         while (true) {
             try {
                 System.out.print("Masukkan Tanggal Lahir Pemain (YYYY-MM-DD) : ");
                 String tanggalInput = br.readLine();
                 tanggalLahir = LocalDate.parse(tanggalInput, DateTimeFormatter.ISO_LOCAL_DATE);
                 umur = Period.between(tanggalLahir, LocalDate.now()).getYears();
-
+    
                 if (umur < 15) {
                     System.out.println("Umur pemain harus minimal 15 tahun.");
-                        continue;
+                    continue;
                 }
-
+    
                 break;
             } catch (DateTimeParseException e) {
                 System.out.println("Format tanggal yang dimasukkan salah. Silakan coba lagi.");
             }
         }
+    
         System.out.println("Pemain Berhasil Ditambahkan");
         playerController.addPlayer(namaPemain, asalKlub, tanggalLahir, umur);
         pause();
     }
+    
 
     private static void tambahStatistik(ArrayList<pemain> player) throws IOException, SQLException {
+        clearScreen();
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
         tampilkanPemain(player);
@@ -402,25 +428,55 @@ public class App extends menu {
             pause();
             return;
         }
+<<<<<<< HEAD
         String namaPemain = cekPemain.getNamaPemain();
         System.out.println(namaPemain);
+=======
+        // String namaPemain = cekPemain.getNamaPemain();
+>>>>>>> bce0b7fcaee0412878c06960f58c504b0ab5b454
         System.out.print("Masukkan Posisi Pemain : ");
         String posisi = br.readLine();
-        System.out.print("Masukkan Jumlah Gol    : ");
-        int gol = Integer.parseInt(br.readLine());
-        System.out.print("Masukkan Jumlah Assist : ");
-        int assist = Integer.parseInt(br.readLine());
-        System.out.print("Masukkan Jumlah Match  : ");
-        int match = Integer.parseInt(br.readLine());
+    
+        int gol = -1;
+        while (gol < 0) {
+            System.out.print("Masukkan Jumlah Gol    : ");
+            gol = Integer.parseInt(br.readLine());
+            if (gol < 0) {
+                System.out.println("Jumlah gol tidak boleh negatif. Silakan masukkan ulang.");
+            }
+        }
+    
+        int assist = -1;
+        while (assist < 0) {
+            System.out.print("Masukkan Jumlah Assist : ");
+            assist = Integer.parseInt(br.readLine());
+            if (assist < 0) {
+                System.out.println("Jumlah assist tidak boleh negatif. Silakan masukkan ulang.");
+            }
+        }
+    
+        int match = -1;
+        while (match < 0) {
+            System.out.print("Masukkan Jumlah Match  : ");
+            match = Integer.parseInt(br.readLine());
+            if (match < 0) {
+                System.out.println("Jumlah match tidak boleh negatif. Silakan masukkan ulang.");
+            }
+        }
         
+<<<<<<< HEAD
 
         statistikController.addStatistik(posisi, gol, assist, match, idPemain, namaPemain);
+=======
+        statistikController.addStatistik(posisi, gol, assist, match, idPemain);
+>>>>>>> bce0b7fcaee0412878c06960f58c504b0ab5b454
         
         System.out.println("Statistik Pemain Berhasil Ditambahkan");
         pause();
-    }
+    }    
     
     private static void tambahKontrakPemain(ArrayList<pemain> player) throws IOException, SQLException {
+        clearScreen();
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
         tampilkanPemain(player);
@@ -455,6 +511,7 @@ public class App extends menu {
     }
 
     private static void updatePemain(ArrayList<pemain> player) throws IOException, SQLException {
+        clearScreen();
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
         String newNamePlayer, newClub;
@@ -503,6 +560,7 @@ public class App extends menu {
     }
 
     private static void hapusPemain(ArrayList<pemain> player) throws IOException, SQLException {
+        clearScreen();
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
         System.out.println("Hapus Data Pemain");
