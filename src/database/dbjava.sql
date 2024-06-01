@@ -100,7 +100,7 @@ INSERT INTO `pemain` (`idPemain`, `namaPemain`, `asalKlub`, `tanggalLahir`, `umu
 (16, 'Enzo Fernandez', 'Chelsea', '2001-01-17', 23),
 (17, 'Jamal Musiala', 'Bayern Munchen', '2003-02-26', 21),
 (18, 'Lamine Yamal', 'Barcelona', '2007-07-13', 16),
-(19, 'Florian Wirtz', 'B Leverkusen', '2003-05-03', 21),
+(19, 'Florian Wirtz', 'Bayer Leverkusen', '2003-05-03', 21),
 (20, 'Gabriel Jesus', 'Arsenal', '1997-04-03', 27);
 
 -- --------------------------------------------------------
