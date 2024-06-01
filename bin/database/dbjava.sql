@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 01, 2024 at 02:58 AM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Generation Time: Jun 01, 2024 at 12:59 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -47,7 +47,8 @@ INSERT INTO `akun` (`id`, `username`, `password`, `role`) VALUES
 (6, '7', 'AiHNmLUAg4L0gMPbMMWM/g==', 'ADMIN'),
 (7, '8', 'oW7pKLJyFzmjTyLDJ9HOEA==', 'ADMIN'),
 (8, 'a', '3if7SGgDfGaG/bfInY73OA==', 'ADMIN'),
-(9, 'anjay', 'orzwiQav7AdeK2BgXGoVcg==', 'ADMIN');
+(9, 'anjay', 'orzwiQav7AdeK2BgXGoVcg==', 'ADMIN'),
+(10, 'user', 'orzwiQav7AdeK2BgXGoVcg==', 'USER');
 
 -- --------------------------------------------------------
 
@@ -60,16 +61,8 @@ CREATE TABLE `kontrakpemain` (
   `kontrakAkhir` date NOT NULL,
   `nilaiKontrak` double NOT NULL,
   `klausulPelepasan` double NOT NULL,
-  `idPemain` int(11) NOT NULL,
-  `namaPemain` varchar(255) NOT NULL
+  `idPemain` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `kontrakpemain`
---
-
-INSERT INTO `kontrakpemain` (`kontrakAwal`, `kontrakAkhir`, `nilaiKontrak`, `klausulPelepasan`, `idPemain`, `namaPemain`) VALUES
-('2023-08-08', '2024-08-08', 450000, 450000, 1, 'Kylian Mbappe');
 
 -- --------------------------------------------------------
 
@@ -90,9 +83,25 @@ CREATE TABLE `pemain` (
 --
 
 INSERT INTO `pemain` (`idPemain`, `namaPemain`, `asalKlub`, `tanggalLahir`, `umur`) VALUES
-(1, 'Kylian Mbappe', 'PSG', '1987-12-20', 25),
-(2, 'Lionel Messi', 'Inter Miami', '1987-06-24', 36),
-(3, 'Frenkie De Jong', 'Barcelona', '1997-05-12', 27);
+(1, 'Kylian Mbappe', 'PSG', '1998-12-20', 25),
+(2, 'Frankie De Jong', 'Barcelona', '1997-05-12', 27),
+(3, 'Lionel Messi', 'Inter Miami', '1987-06-24', 36),
+(4, 'Jude Bellingham', 'Real Madrid', '2003-06-29', 20),
+(6, 'Pablo Gavi', 'Barcelona', '2004-08-05', 19),
+(7, 'Pedri Gonzales', 'Barcelona', '2002-11-25', 21),
+(8, 'Erling Halland', 'Man City', '2000-07-21', 23),
+(9, 'Alejandro Garnacho', 'Man United', '2004-07-01', 19),
+(10, 'Julian Alvarez', 'Man City', '2000-01-31', 24),
+(11, 'Phil Foden', 'Man City', '2000-05-28', 24),
+(12, 'Mohammed Salah', 'Liverpool', '1992-06-15', 31),
+(13, 'Thomas Muller', 'Bayern Munchen', '1989-09-13', 34),
+(14, 'Timo Wurner', 'Tottenham', '1996-03-06', 28),
+(15, 'Robert Sanchez', 'Chelsea', '1997-11-18', 26),
+(16, 'Enzo Fernandez', 'Chelsea', '2001-01-17', 23),
+(17, 'Jamal Musiala', 'Bayern Munchen', '2003-02-26', 21),
+(18, 'Lamine Yamal', 'Barcelona', '2007-07-13', 16),
+(19, 'Florian Wirtz', 'Bayer Leverkusen', '2003-05-03', 21),
+(20, 'Gabriel Jesus', 'Arsenal', '1997-04-03', 27);
 
 -- --------------------------------------------------------
 
@@ -101,22 +110,12 @@ INSERT INTO `pemain` (`idPemain`, `namaPemain`, `asalKlub`, `tanggalLahir`, `umu
 --
 
 CREATE TABLE `statistik` (
+  `idPemain` int(11) NOT NULL,
   `posisi` varchar(255) NOT NULL,
   `gol` int(11) NOT NULL,
   `assist` int(11) NOT NULL,
-  `match` int(11) NOT NULL,
-  `idPemain` int(11) NOT NULL,
-  `namaPemain` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `statistik`
---
-
-INSERT INTO `statistik` (`posisi`, `gol`, `assist`, `match`, `idPemain`, `namaPemain`) VALUES
-('Striker', 20, 25, 20, 1, 'Kylian Mbappe'),
-('Striker', 35, 30, 25, 2, 'Lionel Messi'),
-('Gelandang', 5, 9, 25, 3, 'Frenkie De Jong');
+  `match` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Indexes for dumped tables
@@ -129,12 +128,6 @@ ALTER TABLE `akun`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `kontrakpemain`
---
-ALTER TABLE `kontrakpemain`
-  ADD UNIQUE KEY `idPemain` (`idPemain`);
-
---
 -- Indexes for table `pemain`
 --
 ALTER TABLE `pemain`
@@ -144,7 +137,7 @@ ALTER TABLE `pemain`
 -- Indexes for table `statistik`
 --
 ALTER TABLE `statistik`
-  ADD UNIQUE KEY `idPemain` (`idPemain`);
+  ADD KEY `idPemain` (`idPemain`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -154,13 +147,13 @@ ALTER TABLE `statistik`
 -- AUTO_INCREMENT for table `akun`
 --
 ALTER TABLE `akun`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `pemain`
 --
 ALTER TABLE `pemain`
-  MODIFY `idPemain` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idPemain` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
