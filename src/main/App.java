@@ -400,7 +400,7 @@ public class App extends menu {
             System.out.println("Pemain dengan ID tersebut tidak ditemukan!!!");
             return;
         }
-        String namaPemain = cekPemain.getNamaPemain();
+        // String namaPemain = cekPemain.getNamaPemain();
         System.out.print("Masukkan Posisi Pemain : ");
         String posisi = br.readLine();
     
@@ -431,12 +431,11 @@ public class App extends menu {
             }
         }
         
-        statistikController.addStatistik(posisi, gol, assist, match, idPemain, namaPemain);
+        statistikController.addStatistik(posisi, gol, assist, match, idPemain);
         
         System.out.println("Statistik Pemain Berhasil Ditambahkan");
         pause();
-    }
-    
+    }    
     
     private static void tambahKontrakPemain(ArrayList<pemain> player) throws IOException, SQLException {
         InputStreamReader isr = new InputStreamReader(System.in);
