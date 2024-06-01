@@ -256,6 +256,7 @@ public class App extends menu {
     }
     
     private static void lihatStatistik(ArrayList<interfacePemain> pemainInterface, ArrayList<pemain> player, ArrayList<statistik> stateList) throws IOException, SQLException {
+        clearScreen();
         statistikController.readStatistics();
         System.out.println("Daftar Pemain saat ini : ");
         InputStreamReader isr = new InputStreamReader(System.in);
@@ -305,6 +306,7 @@ public class App extends menu {
     }
     
     private static void lihatKontrakPemain(ArrayList<interfacePemain> pemainInterface, ArrayList<pemain> player, ArrayList<kontrakPemain> contractList) throws IOException, SQLException {
+        clearScreen();
         kontrakController.readContract();
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
@@ -352,6 +354,8 @@ public class App extends menu {
     }
 
     private static void tambahPemain() throws IOException, SQLException {
+        clearScreen();
+        playerController.readPlayer();
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
         String namaPemain, asalKlub;
@@ -384,6 +388,7 @@ public class App extends menu {
     }
 
     private static void tambahStatistik(ArrayList<pemain> player) throws IOException, SQLException {
+        clearScreen();
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
         tampilkanPemain(player);
@@ -438,6 +443,7 @@ public class App extends menu {
     }    
     
     private static void tambahKontrakPemain(ArrayList<pemain> player) throws IOException, SQLException {
+        clearScreen();
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
         tampilkanPemain(player);
@@ -472,6 +478,7 @@ public class App extends menu {
     }
 
     private static void updatePemain(ArrayList<pemain> player) throws IOException, SQLException {
+        clearScreen();
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
         String newNamePlayer, newClub;
@@ -520,6 +527,7 @@ public class App extends menu {
     }
 
     private static void hapusPemain(ArrayList<pemain> player) throws IOException, SQLException {
+        clearScreen();
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
         System.out.println("Hapus Data Pemain");
