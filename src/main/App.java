@@ -357,31 +357,52 @@ public class App extends menu {
         String namaPemain, asalKlub;
         LocalDate tanggalLahir;
         int umur;
-        System.out.print("Masukkan Nama Pemain  : ");
-        namaPemain = br.readLine();
-        System.out.print("Masukkan Asal Klub    : ");
-        asalKlub = br.readLine();
+    
+        // Validasi nama pemain
+        while (true) {
+            System.out.print("Masukkan Nama Pemain  : ");
+            namaPemain = br.readLine();
+            if (namaPemain.matches("[a-zA-Z\\s]+")) {
+                break;
+            } else {
+                System.out.println("Nama pemain hanya boleh mengandung huruf dan spasi. Silakan coba lagi.");
+            }
+        }
+    
+        // Validasi asal klub
+        while (true) {
+            System.out.print("Masukkan Asal Klub    : ");
+            asalKlub = br.readLine();
+            if (asalKlub.matches("[a-zA-Z\\s]+")) {
+                break;
+            } else {
+                System.out.println("Asal klub hanya boleh mengandung huruf dan spasi. Silakan coba lagi.");
+            }
+        }
+    
         while (true) {
             try {
                 System.out.print("Masukkan Tanggal Lahir Pemain (YYYY-MM-DD) : ");
                 String tanggalInput = br.readLine();
                 tanggalLahir = LocalDate.parse(tanggalInput, DateTimeFormatter.ISO_LOCAL_DATE);
                 umur = Period.between(tanggalLahir, LocalDate.now()).getYears();
-
+    
                 if (umur < 15) {
                     System.out.println("Umur pemain harus minimal 15 tahun.");
-                        continue;
+                    continue;
                 }
-
+    
                 break;
             } catch (DateTimeParseException e) {
                 System.out.println("Format tanggal yang dimasukkan salah. Silakan coba lagi.");
             }
         }
+    
         System.out.println("Pemain Berhasil Ditambahkan");
         playerController.addPlayer(namaPemain, asalKlub, tanggalLahir, umur);
         pause();
     }
+    
 
     private static void tambahStatistik(ArrayList<pemain> player) throws IOException, SQLException {
         InputStreamReader isr = new InputStreamReader(System.in);
