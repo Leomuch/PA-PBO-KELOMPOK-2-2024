@@ -219,11 +219,11 @@ public class App extends menu {
                     pause();
                     break;
                     case 2:
-                    lihatStatistik();               
+                    lihatStatistik(pemainInterface, player, stat);               
                     pause();
                     break;
                     case 3:
-                    lihatKontrakPemain();
+                    lihatKontrakPemain(pemainInterface, player, contract);
                     pause();
                     break;
                 case 4:
@@ -255,7 +255,7 @@ public class App extends menu {
         }
     }
     
-    private static void lihatStatistik() throws IOException, SQLException {
+    private static void lihatStatistik(ArrayList<interfacePemain> pemainInterface, ArrayList<pemain> player, ArrayList<statistik> stateList) throws IOException, SQLException {
         statistikController.readStatistics();
         System.out.println("Daftar Pemain saat ini:");
         InputStreamReader isr = new InputStreamReader(System.in);
@@ -304,7 +304,7 @@ public class App extends menu {
         
     }
     
-    private static void lihatKontrakPemain() throws IOException, SQLException {
+    private static void lihatKontrakPemain(ArrayList<interfacePemain> pemainInterface, ArrayList<pemain> player, ArrayList<kontrakPemain> contractList) throws IOException, SQLException {
         kontrakController.readContract();
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
