@@ -169,7 +169,7 @@ public class App extends menu {
     }
 
     private static void menuTambahDetail(ArrayList<interfacePemain> pemainInterface, ArrayList<pemain> player, ArrayList<statistik> stat, ArrayList<kontrakPemain> contract) throws IOException, ParseException, SQLException {
-        playerController.readPlayer();
+        // playerController.readPlayer();
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
         menu obj = new menu();
@@ -257,7 +257,7 @@ public class App extends menu {
     
     private static void lihatStatistik() throws IOException, SQLException {
         statistikController.readStatistics();
-        System.out.println("Daftar Pemain saat ini:");
+        System.out.println("Daftar Pemain saat ini : ");
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
         tampilkanPemain(player);
