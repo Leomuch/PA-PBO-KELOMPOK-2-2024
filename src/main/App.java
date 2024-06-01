@@ -255,7 +255,7 @@ public class App extends menu {
     
     private static void lihatStatistik(ArrayList<interfacePemain> pemainInterface, ArrayList<pemain> player, ArrayList<statistik> stateList) throws IOException, SQLException {
         statistikController.readStatistics();
-        System.out.println("Daftar Pemain saat ini:");
+        System.out.println("Daftar Pemain saat ini : ");
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
         tampilkanPemain(player);
