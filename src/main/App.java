@@ -151,18 +151,24 @@ public class App extends menu {
                     hapusPemain(player);
                     break;
                 case 5:
-                    lihatStatistik(player);
+                    lihatStatistik();
                     break;
                 case 6:
                     tambahStatistik(player);
                     break;
                 case 7:
+                    lihatKontrakPemain();;
+                    break;
+                case 8:
+                    tambahKontrakPemain(player);;
+                    break;
+                case 9:
                     pause();
                     break;
                 default:
                     break;
             }
-        } while (pilihan != 7);
+        } while (pilihan != 9);
     }
 
     @SuppressWarnings("unused")
@@ -219,7 +225,7 @@ public class App extends menu {
         }
     }
     
-    private static void lihatStatistik(ArrayList<pemain> player) throws IOException, SQLException {
+    private static void lihatStatistik() throws IOException, SQLException {
         statistikController.readStatistics();
         System.out.println("Daftar Pemain saat ini:");
         InputStreamReader isr = new InputStreamReader(System.in);
@@ -269,54 +275,52 @@ public class App extends menu {
     }
     
 
-    // private static void lihatKontrakPemain(ArrayList<interfacePemain> pemainInterface, ArrayList<pemain> player, ArrayList<kontrakPemain> contractList) throws IOException{
-    //     InputStreamReader isr = new InputStreamReader(System.in);
-    //     BufferedReader br = new BufferedReader(isr);
-    //     tampilkanPemain(player, pemainInterface);
-    //     System.out.print("Masukkan ID Pemain Yang Ingin Dilihat Kontraknya nya : ");
-    //     int idPemain = Integer.parseInt(br.readLine());
-    //     pemain cekPemain = null;
+    private static void lihatKontrakPemain() throws IOException, SQLException {
+        kontrakController.readContract();
+        InputStreamReader isr = new InputStreamReader(System.in);
+        BufferedReader br = new BufferedReader(isr);
+        tampilkanPemain(player);
+        System.out.print("Masukkan ID Pemain Yang Ingin Dilihat Statistik nya : ");
+        int idPemain = Integer.parseInt(br.readLine());
+        pemain cekPemain = null;
 
-    //     for (pemain cek : player) {
-    //         if (cek.getIdPemain() == idPemain) {
-    //             cekPemain = cek;
-    //             break;
-    //         }
-    //     }
+        for (pemain cek : player) {
+            if (cek.getIdPemain() == idPemain) {
+                cekPemain = cek;
+                break;
+            }
+        }
     
-    //     if (cekPemain == null) {
-    //         System.out.println("Pemain dengan ID " + idPemain + " tidak ditemukan!!!");
-    //         return;
-    //     }
+        if (cekPemain == null) {
+            System.out.println("Pemain dengan ID " + idPemain + " tidak ditemukan!!!");
+            return;
+        }
     
-    //     kontrakPemain contract = null;
-    //     for (kontrakPemain ct : contractList) {
-    //         if (ct.getIdPemain() == idPemain) {
-    //             contract = ct;
-    //             break;
-    //         }
-    //     }
+        kontrakPemain kontrak = null;
+        for (kontrakPemain ct : contract) {
+            if (ct.getIdPemain() == idPemain) {
+                kontrak = ct;
+                break;
+            }
+        }
 
-    //     if (contract == null) {
-    //         System.out.println("Statistik tidak ditemukan.");
-    //         return;
-    //     }
+        if (kontrak == null) {
+            System.out.println("Kontrak tidak ditemukan.");
+            return;
+        }
 
-    //     String namaPemain = contract.getNamaPemain(); 
-    //     Date tanggalMulaiKontrak = contract.getTanggalMulaiKontrak();
-    //     Date tanggalAkhirKontrak = contract.getTanggalAkhirKontrak();
-    //     double nilaiKontrak = contract.getNilaiKontrak();
-    //     double klausulPelepasan = contract.getKlausulPelepasan();
-    //     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-    //     String formattedTanggalMulai = formatter.format(tanggalMulaiKontrak);
-    //     String formattedTanggalAkhir = formatter.format(tanggalAkhirKontrak);
-    //     System.out.println("=============================================================================================================");
-    //     System.out.printf("|%-23s| %-21s| %-22s| %-15s| %-18s| %n", "Nama Pemain", "Tanggal Awal Kontrak", "Tanggal Akhir Kontrak", "Nilai Kontrak", "Klausul Pelepasan" );
-    //     System.out.println("=============================================================================================================");
-    //     System.out.printf("|%-23s| %-21s| %-22s| %-15.2f| %-18.2f| %n", namaPemain, formattedTanggalMulai, formattedTanggalAkhir, nilaiKontrak, klausulPelepasan);
-    //     System.out.println("=============================================================================================================");
+        String namaPemain = kontrak.getNamaPemain(); 
+        LocalDate tanggalMulaiKontrak = kontrak.getTanggalMulaiKontrak();
+        LocalDate tanggalAkhirKontrak = kontrak.getTanggalAkhirKontrak();
+        double nilaiKontrak = kontrak.getNilaiKontrak();
+        double klausulPelepasan = kontrak.getKlausulPelepasan();
+        System.out.println("=============================================================================================================");
+        System.out.printf("|%-23s| %-21s| %-22s| %-15s| %-18s| %n", "Nama Pemain", "Tanggal Awal Kontrak", "Tanggal Akhir Kontrak", "Nilai Kontrak", "Klausul Pelepasan" );
+        System.out.println("=============================================================================================================");
+        System.out.printf("|%-23s| %-21s| %-22s| %-15.2f| %-18.2f| %n", namaPemain, tanggalMulaiKontrak, tanggalAkhirKontrak, nilaiKontrak, klausulPelepasan);
+        System.out.println("=============================================================================================================");
         
-    // }
+    }
 
     private static void tambahPemain() throws IOException, SQLException {
         InputStreamReader isr = new InputStreamReader(System.in);
@@ -376,48 +380,46 @@ public class App extends menu {
         int assist = Integer.parseInt(br.readLine());
         System.out.print("Masukkan Jumlah Match  : ");
         int match = Integer.parseInt(br.readLine());
-    
+        
         statistikController.addStatistik(posisi, gol, assist, match, idPemain, namaPemain);
-    
+        
         System.out.println("Statistik Pemain Berhasil Ditambahkan");
         pause();
     }
     
-
-    // private static void tambahKontrakPemain(ArrayList<kontrakPemain> contract, ArrayList<pemain> player) throws IOException, ParseException {
-    //     InputStreamReader isr = new InputStreamReader(System.in);
-    //     BufferedReader br = new BufferedReader(isr);
-    //     System.out.print("Masukkan ID Pemain     : ");
-    //     int idPemain = Integer.parseInt(br.readLine());
-    //     pemain cekPemain = null;
-    //     for (pemain cek : player) {
-    //         if (cek.getIdPemain() == idPemain) {
-    //             cekPemain = cek;
-    //             break;
-    //         }
-    //     }
-    //     if (cekPemain == null) {
-    //         System.out.println("Pemain dengan ID tersebut tidak ditemukan!!!");
-    //         return;
-    //     }
-    //     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-    //     String namaPemain = cekPemain.getNamaPemain();
-    //     // String asalKlub = cekPemain.getAsalKlub();
-    //     // int umur = cekPemain.getUmur();
-    //     // double marketValue = cekPemain.getMarketValue();
-    //     System.out.print("Masukkan Tanggal Awal      : ");
-    //     Date tanggalMulaiKontrak = formatter.parse(br.readLine());
-    //     System.out.print("Masukkan Tanggal Akhir     : ");
-    //     Date tanggalAkhirKontrak = formatter.parse(br.readLine());
-    //     System.out.print("Masukkan Nilai Kontrak     : ");
-    //     double nilaiKontrak = Double.parseDouble(br.readLine());
-    //     System.out.print("Masukkan Klausul Pelepasan : ");
-    //     double klausulPelepasan = Double.parseDouble(br.readLine());
-    //     kontrakPemain contractPlayer = new kontrakPemain(idPemain, namaPemain, idPemain, tanggalMulaiKontrak, tanggalAkhirKontrak, nilaiKontrak, klausulPelepasan);
-    //     contract.add(contractPlayer);
-    //     System.out.println("Kontrak Pemain Berhasil Ditambahkan");
-    //     pause();
-    // }
+    private static void tambahKontrakPemain(ArrayList<pemain> player) throws IOException, SQLException {
+        InputStreamReader isr = new InputStreamReader(System.in);
+        BufferedReader br = new BufferedReader(isr);
+        tampilkanPemain(player);
+        System.out.print("Masukkan ID Pemain     : ");
+        int idPemain = Integer.parseInt(br.readLine());
+        pemain cekPemain = null;
+        for (pemain cek : player) {
+            if (cek.getIdPemain() == idPemain) {
+                cekPemain = cek;
+                break;
+            }
+        }
+        if (cekPemain == null) {
+            System.out.println("Pemain dengan ID tersebut tidak ditemukan!!!");
+            return;
+        }
+        String namaPemain = cekPemain.getNamaPemain();
+        int idPemainBaru = cekPemain.getIdPemain();
+        System.out.print("Masukkan Tanggal Awal Kontrak (YYYY-MM-DD) : ");
+        String tanggalInputAwal = br.readLine();
+        LocalDate kontrakAwal = LocalDate.parse(tanggalInputAwal, DateTimeFormatter.ISO_LOCAL_DATE);
+        System.out.print("Masukkan Tanggal Akhir Kontrak (YYYY-MM-DD) : ");
+        String tanggalInputAkhir = br.readLine();
+        LocalDate kontrakAkhir = LocalDate.parse(tanggalInputAkhir, DateTimeFormatter.ISO_LOCAL_DATE);
+        System.out.print("Masukkan Nilai Kontrak     : ");
+        double nilaiKontrak = Double.parseDouble(br.readLine());
+        System.out.print("Masukkan Klausul Pelepasan : ");
+        double klausulPelepasan = Double.parseDouble(br.readLine());
+        kontrakController.addContract(kontrakAwal, kontrakAkhir, nilaiKontrak, klausulPelepasan, idPemainBaru, namaPemain);
+        System.out.println("Kontrak Pemain Berhasil Ditambahkan");
+        pause();
+    }
 
     private static void updatePemain(ArrayList<pemain> player) throws IOException, SQLException {
         InputStreamReader isr = new InputStreamReader(System.in);

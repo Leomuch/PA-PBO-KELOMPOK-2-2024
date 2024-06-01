@@ -1,43 +1,49 @@
 package controller;
 
+import java.sql.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
-import data.statistik;
+import data.kontrakPemain;
 import main.App;
 
-public class statistikController {
+public class kontrakController {
     static InputStreamReader isr = new InputStreamReader(System.in);
     static BufferedReader br = new BufferedReader(isr);
-    public static void readStatistics() throws SQLException {
+    public static void readContract() throws SQLException {
         db.connection();
-        String query = "SELECT namaPemain, idPemain, posisi, gol, assist, `match` FROM statistik";
+        String namaPemain;
+        int idPemain;
+        LocalDate kontrakAwal, kontrakAkhir;
+        double nilaiKontrak, klausulPelepasan;
+        String query = "SELECT namaPemain, idPemain, kontrakAwal, kontrakAkhir, nilaiKontrak, klausulPelepasan FROM kontrakPemain";
         try {
             db.preparedStatement = (PreparedStatement) db.conn.prepareStatement(query);
             db.resultSet = db.preparedStatement.executeQuery();
             while (db.resultSet.next()) {
-                int idPemain = db.resultSet.getInt("idPemain");
-                String posisi = db.resultSet.getString("posisi");
-                int gol = db.resultSet.getInt("gol");
-                int assist = db.resultSet.getInt("assist");
-                int match = db.resultSet.getInt("match");
-                String namaPemain = db.resultSet.getString("namaPemain");
-                data.statistik newStatistik = new statistik(posisi, gol, assist, match, idPemain, namaPemain);
-                App.statistikPlayer.add(newStatistik);
+                idPemain = db.resultSet.getInt("idPemain");
+                namaPemain = db.resultSet.getString("namaPemain");
+                kontrakAwal = db.resultSet.getDate("kontrakAwal").toLocalDate();
+                kontrakAkhir = db.resultSet.getDate("kontrakAkhir").toLocalDate();
+                nilaiKontrak = db.resultSet.getDouble("nilaiKontrak");
+                klausulPelepasan = db.resultSet.getDouble("klausulPelepasan");
+                data.kontrakPemain newKontrakPemain = new kontrakPemain(kontrakAwal, kontrakAkhir, nilaiKontrak, klausulPelepasan, idPemain, namaPemain);
+                App.contract.add(newKontrakPemain);
             }
         } catch (SQLException e) {
-            System.out.println("Gagal Membaca Data Statistik");
+            System.out.println("Gagal Membaca Data Kontrak Pemain");
             e.printStackTrace();
         }
     }
 
-    public static void addStatistik(String posisi, int gol, int assist, int match, int idPemain, String namaPemain) throws IOException, SQLException {
+    public static void addContract(LocalDate kontrakAwal, LocalDate kontrakAkhir, double nilaiKontrak, double klausulPelepasan, int idPemain, String namaPemain) throws IOException, SQLException {
         db.connection();
         boolean idPlayerExists = false;
-        String readStatistik = "SELECT COUNT(*) FROM statistik WHERE idPemain = ?";
+        String readStatistik = "SELECT COUNT(*) FROM kontrakPemain WHERE idPemain = ?";
         try {
             db.preparedStatement = db.conn.prepareStatement(readStatistik);
             db.preparedStatement.setInt(1, idPemain);
@@ -51,7 +57,7 @@ public class statistikController {
         }
     
         if (idPlayerExists) {
-            System.out.println("Data Statistik Pemain Tersebut Sudah Ada");
+            System.out.println("Data Kontrak Pemain Tersebut Sudah Ada");
             System.out.print("Data sudah ada. Ingin menambah data lain (1) atau mengedit (2)? Masukkan pilihan: ");
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
             int pilihan = Integer.parseInt(br.readLine());
@@ -66,19 +72,19 @@ public class statistikController {
             }
         } else {
             // Logika untuk menambah data baru ke database
-            String query = "INSERT INTO statistik (posisi, gol, assist, `match`, idPemain, namaPemain) VALUES (?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO kontrakPemain (kontrakAwal, kontrakAkhir, nilaiKontrak, klausulPelepasan, idPemain, namaPemain) VALUES (?, ?, ?, ?, ?, ?)";
             try {
                 db.preparedStatement = db.conn.prepareStatement(query);
-                db.preparedStatement.setString(1, posisi);
-                db.preparedStatement.setInt(2, gol);
-                db.preparedStatement.setInt(3, assist);
-                db.preparedStatement.setInt(4, match);
+                db.preparedStatement.setDate(1, Date.valueOf(kontrakAwal));
+                db.preparedStatement.setDate(2, Date.valueOf(kontrakAkhir));
+                db.preparedStatement.setDouble(3, nilaiKontrak);
+                db.preparedStatement.setDouble(4, klausulPelepasan);
                 db.preparedStatement.setInt(5, idPemain);
                 db.preparedStatement.setString(6, namaPemain);
                 db.preparedStatement.executeUpdate();
-                System.out.println("Tambah Data Statistik Berhasil.");
+                System.out.println("Tambah Data Kontrak Pemain Berhasil.");
             } catch (SQLException e) {
-                System.out.println("Tambah Data Statistik Gagal");
+                System.out.println("Tambah Data Kontrak Pemain Gagal");
                 e.printStackTrace();
             } finally {
                 try {

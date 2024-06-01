@@ -28,7 +28,9 @@ public class menu {
         System.out.println("||  4. Hapus Pemain         ||");
         System.out.println("||  5. Lihat Statistik      ||");
         System.out.println("||  6. Tambah Statistik     ||");
-        System.out.println("||  7. Kembali              ||");
+        System.out.println("||  7. Lihat Kontrak        ||");
+        System.out.println("||  8. Tambah Kontrak       ||");
+        System.out.println("||  9. Kembali              ||");
         System.out.println("==============================");
         System.out.print("Pilihan : ");
     }

@@ -1,25 +1,30 @@
 package data;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class kontrakPemain{
-    private Date tanggalMulaiKontrak;
-    private Date tanggalAkhirKontrak;
+    private LocalDate tanggalMulaiKontrak;
+    private LocalDate tanggalAkhirKontrak;
     private double nilaiKontrak;
     private double klausulPelepasan;
+    private int idPemain;
+    private String namaPemain;
 
-    public kontrakPemain(Date tanggalMulaiKontrak, Date tanggalAkhirKontrak, double nilaiKontrak, double klausulPelepasan){
+    public kontrakPemain(LocalDate tanggalMulaiKontrak, LocalDate tanggalAkhirKontrak, double nilaiKontrak, double klausulPelepasan, int idPemain, String namaPemain){
         this.tanggalMulaiKontrak = tanggalMulaiKontrak;
         this.tanggalAkhirKontrak = tanggalAkhirKontrak;
         this.nilaiKontrak = nilaiKontrak;
         this.klausulPelepasan = klausulPelepasan;
+        this.idPemain = idPemain;
+        this.namaPemain = namaPemain;
     }
 
-    public Date getTanggalMulaiKontrak() {
+    public LocalDate getTanggalMulaiKontrak() {
         return tanggalMulaiKontrak;
     }
 
-    public Date getTanggalAkhirKontrak() {
+    public LocalDate getTanggalAkhirKontrak() {
         return tanggalAkhirKontrak;
     }
 
@@ -31,11 +36,19 @@ public class kontrakPemain{
         return klausulPelepasan;
     }
 
-    public void setTanggalMulaiKontrak(Date tanggalMulaiKontrak) {
+    public int getIdPemain() {
+        return idPemain;
+    }
+
+    public String getNamaPemain() {
+        return namaPemain;
+    }
+
+    public void setTanggalMulaiKontrak(LocalDate tanggalMulaiKontrak) {
         this.tanggalMulaiKontrak = tanggalMulaiKontrak;
     }
 
-    public void setTanggalAkhirKontrak(Date tanggalAkhirKontrak) {
+    public void setTanggalAkhirKontrak(LocalDate tanggalAkhirKontrak) {
         this.tanggalAkhirKontrak = tanggalAkhirKontrak;
     }
 
@@ -45,5 +58,13 @@ public class kontrakPemain{
 
     public void setKlausulPelepasan(double klausulPelepasan) {
         this.klausulPelepasan = klausulPelepasan;
+    }
+
+    public void setIdPemain(int idPemain) {
+        this.idPemain = idPemain;
+    }
+
+    public void setNamaPemain(String namaPemain) {
+        this.namaPemain = namaPemain;
     }
 }

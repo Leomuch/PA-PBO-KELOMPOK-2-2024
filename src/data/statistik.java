@@ -6,7 +6,7 @@ public class statistik{
     private int assist;
     private int match;
     private int idPemain;
-    String namaPemain;
+    private String namaPemain;
 
     public statistik(String posisi, int gol, int assist, int match, int idPemain, String namaPemain) {
         this.posisi = posisi;
