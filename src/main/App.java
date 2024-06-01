@@ -102,24 +102,14 @@ public class App extends menu {
     public static void regis() throws IOException, NoSuchAlgorithmException, InvalidKeyException, InvalidKeySpecException {
         InputStreamReader input = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(input);
-        String username, password, role;
+        String username, password;
+        String role = "USER"; // Set default role to "USER"
+
         clearScreen();
         System.out.print("Masukkan username : ");
         username = br.readLine();
         System.out.print("Masukkan password : ");
         password = br.readLine();
-
-        while (true) {
-            System.out.print("Admin/User      : ");
-            role = br.readLine().trim();
-            role = role.toUpperCase();
-    
-            if ("ADMIN".equals(role) || "USER".equals(role)) {
-                break;
-            } else {
-                System.out.println("Role harus 'Admin' atau 'User'. Silakan coba lagi.");
-            }
-        }
 
         String hash = akunController.hashPass(password);
         
