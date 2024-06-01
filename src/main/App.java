@@ -298,7 +298,8 @@ public class App extends menu {
         int gol = state.getGol();
         int assist = state.getAssist();
         int match = state.getMatch();
-
+        clearScreen();
+        System.out.println("Pemain dengan ID " + idPemain + " ditemukan!!!");
         System.out.println("==========================================================================");
         System.out.printf("|%-25s| %-15s| %-8s| %-8s| %-8s| %n", "Nama Pemain", "Posisi", "Match", "Gol", "Assist" );
         System.out.println("==========================================================================");
@@ -347,6 +348,8 @@ public class App extends menu {
         LocalDate tanggalAkhirKontrak = kontrak.getTanggalAkhirKontrak();
         double nilaiKontrak = kontrak.getNilaiKontrak();
         double klausulPelepasan = kontrak.getKlausulPelepasan();
+        clearScreen();
+        System.out.println("Pemain dengan ID " + idPemain + " ditemukan!!!");
         System.out.println("=============================================================================================================");
         System.out.printf("|%-23s| %-21s| %-22s| %-15s| %-18s| %n", "Nama Pemain", "Tanggal Awal Kontrak", "Tanggal Akhir Kontrak", "Nilai Kontrak", "Klausul Pelepasan" );
         System.out.println("=============================================================================================================");
