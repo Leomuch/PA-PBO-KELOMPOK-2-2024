@@ -170,6 +170,7 @@ public class App extends menu {
     }
 
     private static void menuTambahDetail(ArrayList<interfacePemain> pemainInterface, ArrayList<pemain> player, ArrayList<statistik> stat, ArrayList<kontrakPemain> contract) throws IOException, ParseException, SQLException {
+        playerController.readPlayer();
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader br = new BufferedReader(isr);
         menu obj = new menu();
@@ -398,9 +399,11 @@ public class App extends menu {
         }
         if (cekPemain == null) {
             System.out.println("Pemain dengan ID tersebut tidak ditemukan!!!");
+            pause();
             return;
         }
         String namaPemain = cekPemain.getNamaPemain();
+        System.out.println(namaPemain);
         System.out.print("Masukkan Posisi Pemain : ");
         String posisi = br.readLine();
         System.out.print("Masukkan Jumlah Gol    : ");
@@ -410,6 +413,7 @@ public class App extends menu {
         System.out.print("Masukkan Jumlah Match  : ");
         int match = Integer.parseInt(br.readLine());
         
+
         statistikController.addStatistik(posisi, gol, assist, match, idPemain, namaPemain);
         
         System.out.println("Statistik Pemain Berhasil Ditambahkan");
