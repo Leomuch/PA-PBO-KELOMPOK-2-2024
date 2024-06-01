@@ -172,10 +172,10 @@ public class App extends menu {
                     tambahStatistik(player);
                     break;
                 case 7:
-                    lihatKontrakPemain();;
+                    lihatKontrakPemain();
                     break;
                 case 8:
-                    tambahKontrakPemain(player);;
+                    tambahKontrakPemain(player);
                     break;
                 case 9:
                     pause();
